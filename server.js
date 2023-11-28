@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const mongodb = require('./data/database');
 
 // Start server
 app.listen(3000, () => {
