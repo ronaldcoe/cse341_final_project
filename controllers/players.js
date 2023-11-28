@@ -61,11 +61,9 @@ const createPlayer = async (req, res) => {
     console.error("Error creating player:", error);
 
     // Respond with a 500 Internal Server Error status and a more specific error message
-    res
-      .status(500)
-      .json({
-        error: "Error creating player. Check the server logs for more details.",
-      });
+    res.status(500).json({
+      error: "Error creating player. Check the server logs for more details.",
+    });
   }
 };
 
