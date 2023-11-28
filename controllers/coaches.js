@@ -17,16 +17,17 @@ const getAllCoaches = async (req, res) => {
 const getSingleCoach = async (req, res) => {
   //#swagger.tags=["coaches"]
   try {
-    const coachId = req.params.id;
+    const coachId = req.params["Coach ID"];
     const oneCoach = await Coaches.findById(coachId);
+    if (!oneCoach) {
+      return res.status(404).json({ error: "Coach not found" });
+    }
     res.status(200).json(oneCoach);
   } catch (error) {
     console.error("Error fetching coach, make sure you typed a correct ID");
-    res
-      .status(500)
-      .json({
-        error: "Error fetching coach, make sure you typed a correct ID",
-      });
+    res.status(500).json({
+      error: "Error fetching coach, make sure you typed a correct ID",
+    });
   }
 };
 
@@ -35,18 +36,11 @@ const createCoach = async (req, res) => {
   try {
     // Extract coach details from the request body
     const coach = {
-    //   name: req.body.name,
-    //   position: req.body.position,
-    //   currentTeam: req.body.currentTeam,
-    //   jerseyNumber: req.body.jerseyNumber,
-    //   nationality: req.body.nationality,
-    //   height: {
-    //     feet: req.body.height.feet,
-    //     inches: req.body.height.inches,
-    //   },
-    //   weight: req.body.weight,
-    //   birthdate: req.body.birthdate,
-    //   email: req.body.email,
+      name: req.body.Name,
+      coachId: req.body["Coach ID"],
+      age: req.body.Age,
+      nationality: req.body.Nationality,
+      teamId: req.body["Team ID"],
     };
     const newCoach = await Coaches.Create(coach);
     res.status(204).json(newCoach);
@@ -55,13 +49,12 @@ const createCoach = async (req, res) => {
     console.error("Error creating coach:", error);
 
     // Respond with a 500 Internal Server Error status and a more specific error message
-    res
-      .status(500)
-      .json({
-        error: "Error creating coach. Check the server logs for more details.",
-      });
+    res.status(500).json({
+      error: "Error creating coach. Check the server logs for more details.",
+    });
   }
 };
+
 module.exports = {
   getAllCoaches,
   getSingleCoach,
