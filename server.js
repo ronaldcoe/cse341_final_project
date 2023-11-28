@@ -3,6 +3,11 @@ const app = express();
 const mongodb = require('./data/database');
 
 // Start server
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+mongodb.initDb(err=> {
+  if(err){
+      console.log(err);
+  }else{
+      app.listen(3000);
+      console.log('Listening on port 3000')
+  }
 })
