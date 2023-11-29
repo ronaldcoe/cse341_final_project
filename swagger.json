@@ -164,7 +164,7 @@
         "tags": [
           "players"
         ],
-        "description": "Retrieve information of a specific player by position",
+        "description": "Retrieve information of a player by position",
         "parameters": [
           {
             "name": "Position",
