@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mongodb = require('./data/database');
-
+const indexRouter = require('./routes/index');
 // Start server
 mongodb.initDb(err=> {
   if(err){
