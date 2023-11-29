@@ -1,0 +1,365 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "European Premier League API",
+    "description": "Get information about the European Premier League, 2022 Season",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/teams/": {
+      "get": {
+        "tags": [
+          "teams"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "teams"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Location": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/teams/{TeamID}": {
+      "get": {
+        "tags": [
+          "teams"
+        ],
+        "description": "Retrieve information of a specific team by Team ID",
+        "parameters": [
+          {
+            "name": "TeamID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/players/": {
+      "get": {
+        "tags": [
+          "players"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "players"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "example": "any"
+                },
+                "Position": {
+                  "example": "any"
+                },
+                "Age": {
+                  "example": "any"
+                },
+                "Nationality": {
+                  "example": "any"
+                },
+                "Height": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/players/{PlayerID}": {
+      "get": {
+        "tags": [
+          "players"
+        ],
+        "description": "Retrieve information of a specific player by Player ID",
+        "parameters": [
+          {
+            "name": "PlayerID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/players/{Position}": {
+      "get": {
+        "tags": [
+          "players"
+        ],
+        "description": "Retrieve information of a player by position",
+        "parameters": [
+          {
+            "name": "Position",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/coaches/": {
+      "get": {
+        "tags": [
+          "coaches"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "coaches"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "example": "any"
+                },
+                "Age": {
+                  "example": "any"
+                },
+                "Nationality": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/coaches/{CoachID}": {
+      "get": {
+        "tags": [
+          "coaches"
+        ],
+        "description": "Retrieve information of a specific coach by Coach ID",
+        "parameters": [
+          {
+            "name": "CoachID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/matches/": {
+      "get": {
+        "tags": [
+          "matches"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "matches"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Date": {
+                  "example": "any"
+                },
+                "Score": {
+                  "example": "any"
+                },
+                "Stadium": {
+                  "example": "any"
+                },
+                "Goals": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/matches/{MatchID}": {
+      "get": {
+        "tags": [
+          "matches"
+        ],
+        "description": "Retrieve information of a specific match by Match ID",
+        "parameters": [
+          {
+            "name": "MatchID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/matches/{TeamID}": {
+      "get": {
+        "tags": [
+          "matches"
+        ],
+        "description": "Retrieve information of a specific match by Team ID",
+        "parameters": [
+          {
+            "name": "TeamID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
