@@ -1,6 +1,10 @@
 //Import necessary modules
 const router = require("express").Router();
 
+
+router.use("/", require("./swagger"));  // Use the "/api-docs" route defined in the "swagger" module
+
+
 // Use the "/teams" route defined in the "teams" module
 router.use("/teams", require("./teams"));
 // Use the "/players" route defined in the "players" module

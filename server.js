@@ -12,4 +12,6 @@ mongodb.initDb(err=> {
       console.log('Listening on port 3000')
       app.use('/', indexRouter)
   }
-})
+})  
+
+
