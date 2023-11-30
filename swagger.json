@@ -16,10 +16,10 @@
         "tags": [
           "teams"
         ],
-        "description": "",
+        "description": "Retrieve information of all teams",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List of all teams"
           },
           "500": {
             "description": "Internal Server Error"
@@ -30,7 +30,7 @@
         "tags": [
           "teams"
         ],
-        "description": "",
+        "description": "Create a new team",
         "parameters": [
           {
             "name": "body",
@@ -38,16 +38,20 @@
             "schema": {
               "type": "object",
               "properties": {
-                "Location": {
-                  "example": "any"
-                }
+                "Team Name": { "type": "string", "example": "any" },
+                "Location": { "type": "string", "example": "any" },
+                "Founded Year": { "type": "integer", "example": 2023 },
+                "Coach ID": { "type": "string", "example": "C0001" }
               }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "201": {
+            "description": "Team created successfully"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -71,7 +75,81 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Team data retrieved successfully"
+          },
+          "404": {
+            "description": "Team not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "teams"
+        ],
+        "description": "Update a specific team's information by Team ID",
+        "parameters": [
+          {
+            "name": "TeamID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Team Name": { "type": "string", "example": "any" },
+                "Location": { "type": "string", "example": "any" },
+                "Founded Year": { "type": "integer", "example": 2023 },
+                "Coach ID": { "type": "string", "example": "C0001" }
+               
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Team updated successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Team not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "teams"
+        ],
+        "description": "Delete a specific team by Team ID",
+        "parameters": [
+          {
+            "name": "TeamID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Team deleted successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Team not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -79,15 +157,25 @@
         }
       }
     },
+
+
+
+
+
+
+
+
+
+
     "/players/": {
       "get": {
         "tags": [
           "players"
         ],
-        "description": "",
+        "description": "Retrieve information of all players",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List of all players"
           },
           "500": {
             "description": "Internal Server Error"
@@ -98,7 +186,7 @@
         "tags": [
           "players"
         ],
-        "description": "",
+        "description": "Create a new player",
         "parameters": [
           {
             "name": "body",
@@ -106,28 +194,22 @@
             "schema": {
               "type": "object",
               "properties": {
-                "Name": {
-                  "example": "any"
-                },
-                "Position": {
-                  "example": "any"
-                },
-                "Age": {
-                  "example": "any"
-                },
-                "Nationality": {
-                  "example": "any"
-                },
-                "Height": {
-                  "example": "any"
-                }
+                "Name": { "type": "string", "example": "any" },
+                "Position": { "type": "string", "example": "any" },
+                "Age": { "type": "integer", "example": 25 },
+                "Nationality": { "type": "string", "example": "any" },
+                "Height": { "type": "string", "example": "any" },
+                "Team ID": { "type": "string", "example": "V001" }
               }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "201": {
+            "description": "Player created successfully"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -159,6 +241,9 @@
         }
       }
     },
+
+
+    
     "/players/{Position}": {
       "get": {
         "tags": [
@@ -183,6 +268,14 @@
         }
       }
     },
+  
+
+
+
+
+
+
+
     "/coaches/": {
       "get": {
         "tags": [
@@ -361,5 +454,11 @@
         }
       }
     }
+    }
   }
-}
+
+
+
+
+
+

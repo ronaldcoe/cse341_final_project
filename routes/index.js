@@ -3,6 +3,8 @@ const router = require("express").Router();
 const passport = require('passport');
 const path = require('path');
 
+
+router.use("/", require("./swagger"));  // Use the "/api-docs" route defined in the "swagger" module
 router.get('/', (req, res) => {
     res.render('index', {user: req.session.user});
 });
@@ -22,6 +24,10 @@ router.use('/logout', (req, res) => {
     })
    
 })
+
+
+//router.use("/", require("./swagger"));  // Use the "/api-docs" route defined in the "swagger" module
+
 
 // Use the "/teams" route defined in the "teams" module
 router.use("/teams", require("./teams"));
