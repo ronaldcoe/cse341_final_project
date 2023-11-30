@@ -2,7 +2,7 @@
 const router = require("express").Router();
 
 
-router.use("/", require("./swagger"));  // Use the "/api-docs" route defined in the "swagger" module
+//router.use("/", require("./swagger"));  // Use the "/api-docs" route defined in the "swagger" module
 
 
 // Use the "/teams" route defined in the "teams" module
