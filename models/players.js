@@ -1,6 +1,15 @@
 const mongoose = require("mongoose");
 
 const playerSchema = new mongoose.Schema({
+//   name: { type: String, required: true, maxLength: 30 },
+//   position: { type: String, required: true, maxLength: 25 },
+//   nationality: { type: String, required: true, maxLength: 25 },
+//   playerId: { type: String, required: true, maxLength: 4 },
+//   age: { type: Number, required: true, maxLength: 2 },
+//   teamId: { type: String, required: true, maxLength: 4 },
+//   height: { type: String, required: true, maxLength: 9 },
+// });
+
   playerId: { type: String, required: true, maxLength: 3 },
   name: {
     type: String,
@@ -75,8 +84,8 @@ const playerSchema = new mongoose.Schema({
   },
 });
 
-const Player = mongoose.model("Player", playerSchema);
+const Players = mongoose.model("players", playerSchema);
 
-module.exports = Player;
+module.exports = Players;
 
 
