@@ -5,7 +5,7 @@
     "description": "API for NodeJS",
     "version": "1.0.0"
   },
-  "host": "cse341-final-project-j17k.onrender.com/",
+  "host": "cse341-final-project-j17k.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
