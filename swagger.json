@@ -192,7 +192,7 @@
                 "Age": { "type": "integer", "example": 25 },
                 "Nationality": { "type": "string", "example": "any" },
                 "Height": { "type": "string", "example": "any" },
-                "Team ID": { "type": "string", "example": "V001" }
+                "Team ID": { "type": "string", "example": "T001" }
               }
             }
           }
