@@ -54,8 +54,56 @@ const createTeam = async (req, res) => {
   }
 };
 
+const updateTeam = async (req, res) => {
+  //#swagger.tags=["teams"]
+  try {
+    const teamId = req.params["Team ID"];
+    // Extract team details from the request body
+    const team = {
+      teamName: req.body["Team Name"],
+      coachId: req.body["Coach ID"],
+      location: req.body.Location,
+      teamId: teamId,
+      foundedYear: req.body["Founded Year"],
+    };
+    const updatedTeam = await Teams.Update(team);
+    res.status(204).json(updatedTeam);
+  } catch {
+    // Log the detailed error information
+    console.error("Error updating team:", error);
+
+    // Respond with a 500 Internal Server Error status and a more specific error message
+    res
+      .status(500)
+      .json({
+        error: "Error updating team. Check the server logs for more details.",
+      });
+  }
+};
+
+const deleteTeam = async (req, res) => {
+  //#swagger.tags=["teams"]
+  try {
+    const teamId = req.params["Team ID"];
+    const deletedTeam = await Teams.Delete(teamId);
+    res.status(204).json(deletedTeam);
+  } catch {
+    // Log the detailed error information
+    console.error("Error deleting team:", error);
+
+    // Respond with a 500 Internal Server Error status and a more specific error message
+    res
+      .status(500)
+      .json({
+        error: "Error deleting team. Check the server logs for more details.",
+      });
+  }
+};
+
 module.exports = {
   getAllTeams,
   getSingleTeam,
   createTeam,
+  updateTeam,
+  deleteTeam
 };

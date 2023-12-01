@@ -6,5 +6,7 @@ router.get("/", playersController.getAllPlayers);
 router.get("/:Player ID", playersController.getSinglePlayer);
 router.get("/:Position", playersController.getPlayersByPosition);
 router.post("/", playersController.createPlayer);
+router.put("/:Player ID", playersController.updatePlayer);
+router.delete("/:Player ID", playersController.deletePlayer);
 
 module.exports = router;

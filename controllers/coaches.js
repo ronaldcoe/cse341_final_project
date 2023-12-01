@@ -55,8 +55,52 @@ const createCoach = async (req, res) => {
   }
 };
 
+const updateCoach = async (req, res) => {
+  //#swagger.tags=["coaches"]
+  try {
+    const coachId = req.params["Coach ID"];
+    // Extract coach details from the request body
+    const coach = {
+      name: req.body.Name,
+      coachId: coachId,
+      age: req.body.Age,
+      nationality: req.body.Nationality,
+      teamId: req.body["Team ID"],
+    };
+    const updatedCoach = await Coaches.Update(coach);
+    res.status(204).json(updatedCoach);
+  } catch {
+    // Log the detailed error information
+    console.error("Error updating coach:", error);
+
+    // Respond with a 500 Internal Server Error status and a more specific error message
+    res.status(500).json({
+      error: "Error updating coach. Check the server logs for more details.",
+    });
+  }
+};
+
+const deleteCoach = async (req, res) => {
+  //#swagger.tags=["coaches"]
+  try {
+    const coachId = req.params["Coach ID"];
+    const deletedCoach = await Coaches.Delete(coachId);
+    res.status(204).json(deletedCoach);
+  } catch {
+    // Log the detailed error information
+    console.error("Error deleting coach:", error);
+
+    // Respond with a 500 Internal Server Error status and a more specific error message
+    res.status(500).json({
+      error: "Error deleting coach. Check the server logs for more details.",
+    });
+  }
+};
+
 module.exports = {
   getAllCoaches,
   getSingleCoach,
   createCoach,
+  updateCoach,
+  deleteCoach
 };
