@@ -1,0 +1,474 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "European Premier League API",
+    "description": "Get information about the European Premier League, 2022 Season",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/teams/": {
+      "get": {
+        "tags": [
+          "teams"
+        ],
+        "description": "Retrieve information of all teams",
+        "responses": {
+          "200": {
+            "description": "List of all teams"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "teams"
+        ],
+        "description": "Create a new team",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Team ID": { "type": "string", "example": "T000" },
+                "Team Name": { "type": "string", "example": "any" },
+                "Location": { "type": "string", "example": "any" },
+                "Founded Year": { "type": "integer", "example": 2023 },
+                "Coach ID": { "type": "string", "example": "C0000" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Team created successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/teams/{TeamID}": {
+      "get": {
+        "tags": [
+          "teams"
+        ],
+        "description": "Retrieve information of a specific team by Team ID",
+        "parameters": [
+          {
+            "name": "TeamID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Team data retrieved successfully"
+          },
+          "404": {
+            "description": "Team not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "teams"
+        ],
+        "description": "Update a specific team's information by Team ID",
+        "parameters": [
+          {
+            "name": "TeamID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Team Name": { "type": "string", "example": "any" },
+                "Location": { "type": "string", "example": "any" },
+                "Founded Year": { "type": "integer", "example": 2023 },
+                "Coach ID": { "type": "string", "example": "C0001" }
+               
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Team updated successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Team not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+     
+      "delete": {
+        "tags": [
+          "teams"
+        ],
+        "description": "Delete a specific team by Team ID",
+        "parameters": [
+          {
+            "name": "TeamID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Team deleted successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Team not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/players/": {
+      "get": {
+        "tags": [
+          "players"
+        ],
+        "description": "Retrieve information of all players",
+        "responses": {
+          "200": {
+            "description": "List of all players"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "players"
+        ],
+        "description": "Create a new player",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Player ID": { "type": "string", "example": "P000" },
+                "Name": { "type": "string", "example": "any" },
+                "Position": { "type": "string", "example": "any" },
+                "Age": { "type": "integer", "example": 25 },
+                "Nationality": { "type": "string", "example": "any" },
+                "Height": { "type": "string", "example": "any" },
+                "Team ID": { "type": "string", "example": "T001" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Player created successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/players/{PlayerID}": {
+      "get": {
+        "tags": [
+          "players"
+        ],
+        "description": "Retrieve information of a specific player by Player ID",
+        "parameters": [
+          {
+            "name": "PlayerID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+
+
+    
+    "/players/{Position}": {
+      "get": {
+        "tags": [
+          "players"
+        ],
+        "description": "Retrieve information of a player by position",
+        "parameters": [
+          {
+            "name": "Position",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+
+    "/coaches/": {
+      "get": {
+        "tags": [
+          "coaches"
+        ],
+        "description": "Retrieve information of all coaches",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "coaches"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Coach ID": {
+                  "example": "C000"
+                },
+                "Name": {
+                  "example": "John Doe"
+                },
+                "Age": {
+                  "example": "98"
+                },
+                "Nationality": {
+                  "example": "German"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/coaches/{CoachID}": {
+      "get": {
+        "tags": [
+          "coaches"
+        ],
+        "description": "Retrieve information of a specific coach by Coach ID",
+        "parameters": [
+          {
+            "name": "CoachID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/matches/": {
+      "get": {
+        "tags": [
+          "matches"
+        ],
+        "description": "Retrieve information of all matches",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "matches"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Match ID": {
+                  "example": "M000"
+                },
+                "Date": {
+                  "example": "2000-01-01"
+                },
+                "Teams Involved": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": ["T001", "T002"]
+                },
+                "Score": {
+                  "example": "4-4"
+                },
+                "Stadium": {
+                  "example": "Manchester United Stadium"
+                },
+                "Goals": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Player ID": {
+                        "type": "string"
+                      },
+                      "Time": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "example": [
+                    {"Player ID": "P001", "Time": "35"},
+                    {"Player ID": "P002", "Time": "55"},
+                    {"Player ID": "P001", "Time": "78"}
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      
+
+    "/matches/{MatchID}": {
+      "get": {
+        "tags": [
+          "matches"
+        ],
+        "description": "Retrieve information of a specific match by Match ID",
+        "parameters": [
+          {
+            "name": "MatchID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/matches/{TeamID}": {
+      "get": {
+        "tags": [
+          "matches"
+        ],
+        "description": "Retrieve information of a specific match by Team ID",
+        "parameters": [
+          {
+            "name": "TeamID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+    }
+  }}
