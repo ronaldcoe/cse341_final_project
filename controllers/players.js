@@ -46,13 +46,14 @@ const createPlayer = async (req, res) => {
   try {
     // Extract player details from the request body
     const player = {
-      name: req.body.Name,
-      position: req.body.Position,
       playerId: req.body["Player ID"],
+      name: req.body.Name,
       age: req.body.Age,
-      nationality: req.body.Nationality,
-      teamId: req.body["Team ID"],
       height: req.body.Height,
+      nationality: req.body.Nationality,
+      position: req.body.Position,
+      teamId: req.body["Team ID"],
+      
     };
     const newPlayer = await Players.Create(player);
     res.status(204).json(newPlayer);
