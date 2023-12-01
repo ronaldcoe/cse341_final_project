@@ -60,9 +60,51 @@ const createMatch = async (req, res) => {
   }
 };
 
+const updateMatch = async (req, res) => {
+  //#swagger.tags=["matches"]
+  try {
+    const matchId = req.params["Match ID"];
+    const match = {
+      matchId: matchId,
+      date: req.body.Date,
+      teamsInvolved: req.body["Teams Involved"],
+      score: req.body.Score,
+      stadium: req.body.Stadium,
+      goals: req.body.Goals,
+    };
+    const updatedMatch = await Matches.Update(match);
+    res.status(204).json(updatedMatch);
+  } catch (error) {
+    console.error("Error updating match:", error);
+
+    // Respond with a 500 Internal Server Error status and a more specific error message
+    res.status(500).json({
+      error: "Error updating match. Check the server logs for more details.",
+    });
+  }
+};
+
+const deleteMatch = async (req, res) => {
+  //#swagger.tags=["matches"]
+  try {
+    const matchId = req.params["Match ID"];
+    const deletedMatch = await Matches.Delete(matchId);
+    res.status(204).json(deletedMatch);
+  } catch (error) {
+    console.error("Error deleting match:", error);
+
+    // Respond with a 500 Internal Server Error status and a more specific error message
+    res.status(500).json({
+      error: "Error deleting match. Check the server logs for more details.",
+    });
+  }
+};
+
 module.exports = {
   getAllMatches,
   getSingleMatch,
   getMatchesByTeamId,
   createMatch,
+  updateMatch,
+  deleteMatch
 };

@@ -67,9 +67,55 @@ const createPlayer = async (req, res) => {
   }
 };
 
+const updatePlayer = async (req, res) => {
+  //#swagger.tags=["players"]
+  try {
+    const playerId = req.params["Player ID"];
+    // Extract player details from the request body
+    const player = {
+      name: req.body.Name,
+      position: req.body.Position,
+      playerId: playerId,
+      age: req.body.Age,
+      nationality: req.body.Nationality,
+      teamId: req.body["Team ID"],
+      height: req.body.Height,
+    };
+    const updatePlayer = await Players.Update(player);
+    res.status(204).json(updatePlayer);
+  } catch {
+    // Log the detailed error information
+    console.error("Error updating player:", error);
+
+    // Respond with a 500 Internal Server Error status and a more specific error message
+    res.status(500).json({
+      error: "Error updating player. Check the server logs for more details.",
+    });
+  }
+};
+
+const deletePlayer = async (req, res) => {
+  //#swagger.tags=["players"]
+  try {
+    const playerId = req.params["Player ID"];
+    const deletePlayer = await Players.Delete(playerId);
+    res.status(204).json(deletePlayer);
+  } catch {
+    // Log the detailed error information
+    console.error("Error deleting player:", error);
+
+    // Respond with a 500 Internal Server Error status and a more specific error message
+    res.status(500).json({
+      error: "Error deleting player. Check the server logs for more details.",
+    });
+  }
+};
+
 module.exports = {
   getPlayersByPosition,
   getAllPlayers,
   getSinglePlayer,
   createPlayer,
+  updatePlayer,
+  deletePlayer
 };
