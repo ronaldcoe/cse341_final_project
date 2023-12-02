@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
 
 const playerSchema = new mongoose.Schema({
-//   name: { type: String, required: true, maxLength: 30 },
-//   position: { type: String, required: true, maxLength: 25 },
-//   nationality: { type: String, required: true, maxLength: 25 },
-//   playerId: { type: String, required: true, maxLength: 4 },
-//   age: { type: Number, required: true, maxLength: 2 },
-//   teamId: { type: String, required: true, maxLength: 4 },
-//   height: { type: String, required: true, maxLength: 9 },
-// });
+  //   name: { type: String, required: true, maxLength: 30 },
+  //   position: { type: String, required: true, maxLength: 25 },
+  //   nationality: { type: String, required: true, maxLength: 25 },
+  //   playerId: { type: String, required: true, maxLength: 4 },
+  //   age: { type: Number, required: true, maxLength: 2 },
+  //   teamId: { type: String, required: true, maxLength: 4 },
+  //   height: { type: String, required: true, maxLength: 9 },
+  // });
 
-  playerId: { type: String, required: true, maxLength: 3 },
+  playerId: { type: String, required: true, maxLength: 5 },
   name: {
     type: String,
     required: true,
@@ -23,17 +23,37 @@ const playerSchema = new mongoose.Schema({
         "Name must be a non-empty string with a maximum length of 25 characters.", // Updated error message
     },
   },
+  // age: {
+  //   type: Number,
+  //   required: true,
+  //   validate: {
+  //     validator: function (value) {
+  //       // Ensure that the age is a number and is greater than or equal to 14
+  //       return Number.isInteger(value) && value >= 14;
+  //     },
+  //     message: "Age must be a number greater than or equal to 14.",
+  //   },
+  // },
+
   age: {
-    type: Number,
+    type: String,
     required: true,
     validate: {
       validator: function (value) {
-        // Ensure that the age is a number and is greater than or equal to 14
-        return Number.isInteger(value) && value >= 14;
+        // Ensure that the age is a non-empty string and represents a value greater than 14
+        const parsedAge = parseInt(value, 10);
+        return (
+          typeof value === "string" &&
+          value.trim().length > 0 &&
+          !isNaN(parsedAge) &&
+          parsedAge > 14
+        );
       },
-      message: "Age must be a number greater than or equal to 14.",
+      message:
+        "Age must be a non-empty string representing a value greater than 14.",
     },
   },
+
   height: {
     type: String,
     required: true,
@@ -75,11 +95,11 @@ const playerSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator: function (value) {
-        // Ensure that the value is a 3-digit string containing only numbers
-        return /^\d{3}$/.test(value);
+        // Ensure that the value is a string starting with 'T' followed by exactly 3 digits
+        return /^T\d{3}$/.test(value);
       },
       message:
-        'TeamId must be a 3-digit string containing only numbers, like "012".',
+        'TeamId must be a string starting with "T" followed by exactly 3 digits, like "T012".',
     },
   },
 });
@@ -87,5 +107,3 @@ const playerSchema = new mongoose.Schema({
 const Players = mongoose.model("players", playerSchema);
 
 module.exports = Players;
-
-

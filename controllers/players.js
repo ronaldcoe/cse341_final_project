@@ -26,11 +26,24 @@ const getAllPlayers = async (req, res) => {
 const getPlayerById = async (req, res) => {
   //#swagger.tags=["players"]
   try {
-    const playerId = req.params.id;
-    const onePlayer = await Players.findById(playerId);
+    const playerId = req.params["Player ID"];
+    console.log("Player ID:", playerId);
+
+    const onePlayer = await Players.findOne({ "Player ID": playerId });
+    console.log("Found Player:", onePlayer);
+
+    // const position = req.params.Position;
+    // const playersByPosition = await Players.find({ Position: position });
+
+    if (!onePlayer) {
+      // If no player is found, respond with a 404 Not Found status
+      return res.status(404).json({ error: "Player not found" });
+    }
+
+    // Respond with a 200 status and the player in the response body
     res.status(200).json(onePlayer);
   } catch (error) {
-    console.error("Error fetching player, make sure you typed a correct ID");
+    console.error("Error fetching player by ID:", error);
 
     // Check if the error is a Mongoose validation error
     if (error.name === "ValidationError") {
@@ -38,14 +51,17 @@ const getPlayerById = async (req, res) => {
       const validationErrors = Object.values(error.errors).map(
         (error) => error.message
       );
-
       return res.status(400).json({ errors: validationErrors });
     }
+
+    // Respond with a 500 Internal Server Error status and a more specific error message
     res.status(500).json({
-      error: "Error fetching player, make sure you typed a correct ID",
+      error:
+        "Error fetching player by ID. Check the server logs for more details.",
     });
   }
 };
+
 const getPlayersByPosition = async (req, res) => {
   //#swagger.tags=["players"]
   try {
