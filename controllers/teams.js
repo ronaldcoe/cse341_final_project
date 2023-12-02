@@ -9,7 +9,17 @@ const getAllTeams = async (req, res) => {
     const allTeams = await Teams.find();
     res.status(200).json(allTeams);
   } catch (error) {
-    console.error("Error fetching teames", error);
+    console.error("Error fetching teams", error);
+
+    // Check if the error is a Mongoose validation error
+    if (error.name === "ValidationError") {
+      // Extract validation error messages and respond with a 400 status
+      const validationErrors = Object.values(error.errors).map(
+        (error) => error.message
+      );
+
+      return res.status(400).json({ errors: validationErrors });
+    }
     res.status(500).send("Error fetching teames");
   }
 };
@@ -22,6 +32,16 @@ const getSingleTeam = async (req, res) => {
     res.status(200).json(oneTeam);
   } catch (error) {
     console.error("Error fetching team, make sure you typed a correct ID");
+
+    // Check if the error is a Mongoose validation error
+    if (error.name === "ValidationError") {
+      // Extract validation error messages and respond with a 400 status
+      const validationErrors = Object.values(error.errors).map(
+        (error) => error.message
+      );
+
+      return res.status(400).json({ errors: validationErrors });
+    }
     res.status(500).json({
       error: "Error fetching team, make sure you typed a correct ID",
     });
@@ -41,16 +61,24 @@ const createTeam = async (req, res) => {
     };
     const newTeam = await Teams.Create(team);
     res.status(204).json(newTeam);
-  } catch {
+  } catch (error) {
     // Log the detailed error information
     console.error("Error creating team:", error);
 
+    // Check if the error is a Mongoose validation error
+    if (error.name === "ValidationError") {
+      // Extract validation error messages and respond with a 400 status
+      const validationErrors = Object.values(error.errors).map(
+        (error) => error.message
+      );
+
+      return res.status(400).json({ errors: validationErrors });
+    }
+
     // Respond with a 500 Internal Server Error status and a more specific error message
-    res
-      .status(500)
-      .json({
-        error: "Error creating team. Check the server logs for more details.",
-      });
+    res.status(500).json({
+      error: "Error creating team. Check the server logs for more details.",
+    });
   }
 };
 
@@ -68,16 +96,23 @@ const updateTeam = async (req, res) => {
     };
     const updatedTeam = await Teams.Update(team);
     res.status(204).json(updatedTeam);
-  } catch {
+  } catch (error) {
     // Log the detailed error information
     console.error("Error updating team:", error);
 
+    // Check if the error is a Mongoose validation error
+    if (error.name === "ValidationError") {
+      // Extract validation error messages and respond with a 400 status
+      const validationErrors = Object.values(error.errors).map(
+        (error) => error.message
+      );
+
+      return res.status(400).json({ errors: validationErrors });
+    }
     // Respond with a 500 Internal Server Error status and a more specific error message
-    res
-      .status(500)
-      .json({
-        error: "Error updating team. Check the server logs for more details.",
-      });
+    res.status(500).json({
+      error: "Error updating team. Check the server logs for more details.",
+    });
   }
 };
 
@@ -87,16 +122,14 @@ const deleteTeam = async (req, res) => {
     const teamId = req.params["Team ID"];
     const deletedTeam = await Teams.Delete(teamId);
     res.status(204).json(deletedTeam);
-  } catch {
+  } catch (error) {
     // Log the detailed error information
     console.error("Error deleting team:", error);
 
     // Respond with a 500 Internal Server Error status and a more specific error message
-    res
-      .status(500)
-      .json({
-        error: "Error deleting team. Check the server logs for more details.",
-      });
+    res.status(500).json({
+      error: "Error deleting team. Check the server logs for more details.",
+    });
   }
 };
 
@@ -105,5 +138,5 @@ module.exports = {
   getSingleTeam,
   createTeam,
   updateTeam,
-  deleteTeam
+  deleteTeam,
 };

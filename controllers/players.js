@@ -10,23 +10,58 @@ const getAllPlayers = async (req, res) => {
     res.status(200).json(allPlayers);
   } catch (error) {
     console.error("Error fetching playeres", error);
+    // Check if the error is a Mongoose validation error
+    if (error.name === "ValidationError") {
+      // Extract validation error messages and respond with a 400 status
+      const validationErrors = Object.values(error.errors).map(
+        (error) => error.message
+      );
+
+      return res.status(400).json({ errors: validationErrors });
+    }
     res.status(500).send("Error fetching playeres");
   }
 };
 
-const getSinglePlayer = async (req, res) => {
+const getPlayerById = async (req, res) => {
   //#swagger.tags=["players"]
   try {
-    const playerId = req.params.id;
-    const onePlayer = await Players.findById(playerId);
+    const playerId = req.params["Player ID"];
+    console.log("Player ID:", playerId);
+
+    const onePlayer = await Players.findOne({ "Player ID": playerId });
+    console.log("Found Player:", onePlayer);
+
+    // const position = req.params.Position;
+    // const playersByPosition = await Players.find({ Position: position });
+
+    if (!onePlayer) {
+      // If no player is found, respond with a 404 Not Found status
+      return res.status(404).json({ error: "Player not found" });
+    }
+
+    // Respond with a 200 status and the player in the response body
     res.status(200).json(onePlayer);
   } catch (error) {
-    console.error("Error fetching player, make sure you typed a correct ID");
+    console.error("Error fetching player by ID:", error);
+
+    // Check if the error is a Mongoose validation error
+    if (error.name === "ValidationError") {
+      // Extract validation error messages and respond with a 400 status
+      const validationErrors = Object.values(error.errors).map(
+        (error) => error.message
+      );
+      return res.status(400).json({ errors: validationErrors });
+    }
+
+    // Respond with a 500 Internal Server Error status and a more specific error message
     res.status(500).json({
-      error: "Error fetching player, make sure you typed a correct ID",
+      error:
+        "Error fetching player by ID. Check the server logs for more details.",
     });
   }
 };
+
 const getPlayersByPosition = async (req, res) => {
   //#swagger.tags=["players"]
   try {
@@ -35,6 +70,17 @@ const getPlayersByPosition = async (req, res) => {
     res.status(200).json(playersByPosition);
   } catch (error) {
     console.error("Error fetching players by position", error);
+
+    // Check if the error is a Mongoose validation error
+    if (error.name === "ValidationError") {
+      // Extract validation error messages and respond with a 400 status
+      const validationErrors = Object.values(error.errors).map(
+        (error) => error.message
+      );
+
+      return res.status(400).json({ errors: validationErrors });
+    }
+
     res.status(500).json({
       error: "Error fetching players by position",
     });
@@ -53,14 +99,22 @@ const createPlayer = async (req, res) => {
       nationality: req.body.Nationality,
       position: req.body.Position,
       teamId: req.body["Team ID"],
-      
     };
-    const newPlayer = await Players.Create(player);
+    const newPlayer = await Players.create(player);
     res.status(204).json(newPlayer);
-  } catch {
+  } catch (error) {
+    // Check if the error is a Mongoose validation error
+    if (error.name === "ValidationError") {
+      // Extract validation error messages and respond with a 400 status
+      const validationErrors = Object.values(error.errors).map(
+        (error) => error.message
+      );
+
+      return res.status(400).json({ errors: validationErrors });
+    }
+
     // Log the detailed error information
     console.error("Error creating player:", error);
-
     // Respond with a 500 Internal Server Error status and a more specific error message
     res.status(500).json({
       error: "Error creating player. Check the server logs for more details.",
@@ -115,9 +169,8 @@ const deletePlayer = async (req, res) => {
 module.exports = {
   getPlayersByPosition,
   getAllPlayers,
-  getSinglePlayer,
+  getPlayerById,
   createPlayer,
   updatePlayer,
-  deletePlayer
+  deletePlayer,
 };
-
