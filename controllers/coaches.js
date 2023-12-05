@@ -14,7 +14,7 @@ const getAllCoaches = async (req, res) => {
   }
 };
 
-const getSingleCoach = async (req, res) => {
+const getCoachById = async (req, res) => {
   //#swagger.tags=["coaches"]
   try {
     const coachId = req.params["Coach ID"];
@@ -99,7 +99,7 @@ const deleteCoach = async (req, res) => {
 
 module.exports = {
   getAllCoaches,
-  getSingleCoach,
+  getCoachById,
   createCoach,
   updateCoach,
   deleteCoach
