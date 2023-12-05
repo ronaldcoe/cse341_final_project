@@ -16,7 +16,7 @@ const getAllMatches = async (req, res) => {
   }
 };
 
-const getSingleMatch = async (req, res) => {
+const getMatchById = async (req, res) => {
   //#swagger.tags=["matches"]
   try {
     const matchId = req.params["Match ID"];
@@ -109,7 +109,7 @@ const deleteMatch = async (req, res) => {
 
 module.exports = {
   getAllMatches,
-  getSingleMatch,
+  getMatchById,
   getMatchesByTeamId,
   createMatch,
   updateMatch,
