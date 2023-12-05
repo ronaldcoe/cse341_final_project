@@ -59,7 +59,7 @@ const createTeam = async (req, res) => {
       teamId: req.body["Team ID"],
       foundedYear: req.body["Founded Year"],
     };
-    const newTeam = await Teams.Create(team);
+    const newTeam = await Teams.create(team);
     res.status(204).json(newTeam);
   } catch (error) {
     // Log the detailed error information
