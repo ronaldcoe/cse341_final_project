@@ -24,7 +24,7 @@ const getAllTeams = async (req, res) => {
   }
 };
 
-const getSingleTeam = async (req, res) => {
+const getTeamById = async (req, res) => {
   //#swagger.tags=["teams"]
   try {
     const teamId = req.params["Team ID"];
@@ -135,7 +135,7 @@ const deleteTeam = async (req, res) => {
 
 module.exports = {
   getAllTeams,
-  getSingleTeam,
+  getTeamById,
   createTeam,
   updateTeam,
   deleteTeam,
