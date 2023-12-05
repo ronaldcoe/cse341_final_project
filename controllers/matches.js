@@ -1,8 +1,6 @@
 // Import the Mongoose Library
-
-const request = require('supertest');
 const express = require('express');
-const router = express.Router();
+
 const mongoose = require("mongoose");
 // Import the matches model (create a models/matches.js file)
 const Matches = require("../models/matches");
@@ -108,30 +106,6 @@ const deleteMatch = async (req, res) => {
 
 
 
-
-
-router.get('/:Match ID', getSingleMatch); // the function you are testing
-
-jest.mock('../models/matches');
-
-describe('Test the getSingleMatch function', () => {
-    test('It should respond with a match for valid ID', async () => {
-        const match = { _id: 'M001', name: 'Match 1' };
-        Matches.findById.mockResolvedValue(match);
-
-        const response = await request(router).get('/M001');
-        expect(response.statusCode).toBe(200);
-        expect(response.body).toEqual(match);
-    });
-
-    test('It should respond with 500 for database error', async () => {
-        Matches.findById.mockRejectedValue(new Error('Error fetching match'));
-
-        const response = await request(router).get('/M001');
-        expect(response.statusCode).toBe(500);
-        expect(response.body).toEqual({ error: 'Error fetching match' });
-    });
-});
 
 module.exports = {
   getAllMatches,
