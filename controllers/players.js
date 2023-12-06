@@ -168,5 +168,5 @@ module.exports = {
   getPlayerById,
   createPlayer,
   updatePlayer,
-  deletePlayer,
+  deletePlayer
 };
