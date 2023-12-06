@@ -3,10 +3,10 @@ const router = require("express").Router();
 const matchesController = require("../controllers/matches");
 
 router.get("/", matchesController.getAllMatches);
-router.get("/:Match ID", matchesController.getMatchById);
-router.get("/:Team ID", matchesController.getMatchesByTeamId);
+router.get("/:Match_ID", matchesController.getMatchById);
+router.get("/:Team_ID", matchesController.getMatchesByTeamId);
 router.post("/", matchesController.createMatch);
-router.put("/:Match ID", matchesController.updateMatch);
-router.delete("/:Match ID", matchesController.deleteMatch);
+router.put("/:Match_ID", matchesController.updateMatch);
+router.delete("/:Match_ID", matchesController.deleteMatch);
 
 module.exports = router;

@@ -104,6 +104,7 @@ const playerSchema = new mongoose.Schema({
   },
 });
 
+
 const Players = mongoose.model("players", playerSchema);
 
 module.exports = Players;

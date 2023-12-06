@@ -27,8 +27,14 @@ const getAllTeams = async (req, res) => {
 const getTeamById = async (req, res) => {
   //#swagger.tags=["teams"]
   try {
-    const teamId = req.params["Team ID"];
+    const teamId = req.params.Team_ID;
     const oneTeam = await Teams.findById(teamId);
+
+    // Check if oneTeam is null, indicating no team was found for the given ID
+    if (!oneTeam) {
+      return res.status(404).json({ error: "Team not found" });
+    }
+
     res.status(200).json(oneTeam);
   } catch (error) {
     console.error("Error fetching team, make sure you typed a correct ID");
@@ -42,22 +48,24 @@ const getTeamById = async (req, res) => {
 
       return res.status(400).json({ errors: validationErrors });
     }
+
     res.status(500).json({
       error: "Error fetching team, make sure you typed a correct ID",
     });
   }
 };
 
+
 const createTeam = async (req, res) => {
   //#swagger.tags=["teams"]
   try {
     // Extract team details from the request body
     const team = {
-      teamName: req.body["Team Name"],
-      coachId: req.body["Coach ID"],
+      teamName: req.body.Team_Name,
+      coachId: req.body.Coach_ID,
       location: req.body.Location,
-      teamId: req.body["Team ID"],
-      foundedYear: req.body["Founded Year"],
+      teamId: req.body.Team_ID,
+      foundedYear: req.body.Founded_Year,
     };
     const newTeam = await Teams.create(team);
     res.status(204).json(newTeam);
@@ -85,14 +93,14 @@ const createTeam = async (req, res) => {
 const updateTeam = async (req, res) => {
   //#swagger.tags=["teams"]
   try {
-    const teamId = req.params["Team ID"];
+    const teamId = req.params.Team_ID;
     // Extract team details from the request body
     const team = {
-      teamName: req.body["Team Name"],
-      coachId: req.body["Coach ID"],
+      teamName: req.body.Team_Name,
+      coachId: req.body.Coach_ID,
       location: req.body.Location,
       teamId: teamId,
-      foundedYear: req.body["Founded Year"],
+      foundedYear: req.body.Founded_Year,
     };
     const updatedTeam = await Teams.Update(team);
     res.status(204).json(updatedTeam);
@@ -119,7 +127,7 @@ const updateTeam = async (req, res) => {
 const deleteTeam = async (req, res) => {
   //#swagger.tags=["teams"]
   try {
-    const teamId = req.params["Team ID"];
+    const teamId = req.paramsTeam_ID;
     const deletedTeam = await Teams.Delete(teamId);
     res.status(204).json(deletedTeam);
   } catch (error) {
