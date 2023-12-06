@@ -19,7 +19,7 @@ const getAllMatches = async (req, res) => {
 const getMatchById = async (req, res) => {
   //#swagger.tags=["matches"]
   try {
-    const matchId = req.params["Match ID"];
+    const matchId = req.params["Match_ID"];
     const match = await Matches.findById(matchId);
     res.status(200).json(match);
   } catch (error) {
@@ -31,8 +31,8 @@ const getMatchById = async (req, res) => {
 const getMatchesByTeamId = async (req, res) => {
   //#swagger.tags=["matches"]
   try {
-    const teamId = req.params["Team ID"];
-    const match = await Matches.findById({"Team ID": teamId});
+    const teamId = req.params["Team_ID"];
+    const match = await Matches.findById({"Team_ID": teamId});
     res.status(200).json(match);
   } catch (error) {
     console.error("Error fetching match:", error);
@@ -44,13 +44,13 @@ const createMatch = async (req, res) => {
   //#swagger.tags=["matches"]
   try {
     const matchData = {
-      matchId: req.body["Match ID"],
+      matchId: req.body["Match_ID"],
       date: new Date(req.body.Date), // Converting to Date object
       teamsInvolved: req.body["Teams Involved"],
       score: req.body.Score,
       stadium: req.body.Stadium,
       goals: req.body.Goals.map(goal => ({
-        playerId: goal["Player ID"],
+        playerId: goal["Player_ID"],
         time: parseInt(goal.Time) // Ensure time is a number
       })),
     };
@@ -67,14 +67,14 @@ const createMatch = async (req, res) => {
 const updateMatch = async (req, res) => {
   //#swagger.tags=["matches"]
   try {
-    const matchId = req.params["Match ID"]; // Assuming the param is named 'matchId'
+    const matchId = req.params["Match_ID"]; // Assuming the param is named 'matchId'
     const matchData = {
       date: new Date(req.body.Date),
       teamsInvolved: req.body["Teams Involved"],
       score: req.body.Score,
       stadium: req.body.Stadium,
       goals: req.body.Goals.map(goal => ({
-        playerId: goal["Player ID"],
+        playerId: goal["Player_ID"],
         time: parseInt(goal.Time)
       })),
     };
@@ -91,7 +91,7 @@ const updateMatch = async (req, res) => {
 const deleteMatch = async (req, res) => {
   //#swagger.tags=["matches"]
   try {
-    const matchId = req.params["Match ID"];
+    const matchId = req.params["Match_ID"];
     const deletedMatch = await Matches.Delete(matchId);
     res.status(204).json(deletedMatch);
   } catch (error) {

@@ -17,7 +17,7 @@ const getAllCoaches = async (req, res) => {
 const getCoachById = async (req, res) => {
   //#swagger.tags=["coaches"]
   try {
-    const coachId = req.params["Coach ID"];
+    const coachId = req.params["Coach_ID"];
     const oneCoach = await Coaches.findById(coachId);
     if (!oneCoach) {
       return res.status(404).json({ error: "Coach not found" });
@@ -31,16 +31,20 @@ const getCoachById = async (req, res) => {
   }
 };
 
+
+
+
+
 const createCoach = async (req, res) => {
   //#swagger.tags=["coaches"]
   try {
     // Extract coach details from the request body
     const coach = {
       name: req.body.Name,
-      coachId: req.body["Coach ID"],
+      coachId: req.body["Coach_ID"],
       age: req.body.Age,
       nationality: req.body.Nationality,
-      teamId: req.body["Team ID"],
+      teamId: req.body["Team_ID"],
     };
     const newCoach = await Coaches.Create(coach);
     res.status(204).json(newCoach);
@@ -58,14 +62,14 @@ const createCoach = async (req, res) => {
 const updateCoach = async (req, res) => {
   //#swagger.tags=["coaches"]
   try {
-    const coachId = req.params["Coach ID"];
+    const coachId = req.params["Coach_ID"];
     // Extract coach details from the request body
     const coach = {
       name: req.body.Name,
       coachId: coachId,
       age: req.body.Age,
       nationality: req.body.Nationality,
-      teamId: req.body["Team ID"],
+      teamId: req.body["Team_ID"],
     };
     const updatedCoach = await Coaches.Update(coach);
     res.status(204).json(updatedCoach);
@@ -83,7 +87,7 @@ const updateCoach = async (req, res) => {
 const deleteCoach = async (req, res) => {
   //#swagger.tags=["coaches"]
   try {
-    const coachId = req.params["Coach ID"];
+    const coachId = req.params["Coach_ID"];
     const deletedCoach = await Coaches.Delete(coachId);
     res.status(204).json(deletedCoach);
   } catch {
