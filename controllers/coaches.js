@@ -31,10 +31,6 @@ const getCoachById = async (req, res) => {
   }
 };
 
-
-
-
-
 const createCoach = async (req, res) => {
   //#swagger.tags=["coaches"]
   try {

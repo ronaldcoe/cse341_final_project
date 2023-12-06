@@ -27,7 +27,7 @@ const getPlayerById = async (req, res) => {
   //#swagger.tags=["players"]
   try {
     const playerId = req.params["Player_ID"];
-    console.log("Player ID:", playerId);
+    console.log("Player_ID:", playerId);
 
     const onePlayer = await Players.findOne({ "Player_ID": playerId });
     console.log("Found Player:", onePlayer);
