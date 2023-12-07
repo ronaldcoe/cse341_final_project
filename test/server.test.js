@@ -22,7 +22,7 @@ passport.authenticate = jest.fn(() => (req, res, next) => {
   req.user = { id: '12345', username: 'testuser' }; // Mock user object
   next();
 });
-
+//
 // Use the index router
 app.use('/', indexRouter);
 

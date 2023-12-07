@@ -32,25 +32,6 @@ describe('Matches Routes', () => {
     });
   });
 
- /* describe('GET /matches/:Team_ID', () => {
-    test('should fetch matches by Team_ID', async () => {
-      const teamId = 'T001';
-      const mockMatches = [{ matchId: 'M002', teamsInvolved: ['Team A', 'Team C'] }];
-      matchesController.getMatchesByTeamId.mockImplementation((req, res) => {
-        // Ensure the mock returns the correct data based on the teamId
-        if (req.params.Team_ID === teamId) {
-          return res.status(200).json(mockMatches);
-        } else {
-          return res.status(404).json({ error: 'No matches found' });
-        }
-      });
-  
-      const response = await request(app).get(`/matches/${teamId}`);
-      expect(response.statusCode).toBe(200);
-      expect(response.body).toEqual(mockMatches); // Ensure the expectation matches the mock
-    });
-  }); */
-  
 
   describe('POST /matches', () => {
     test('should create a new match', async () => {
@@ -84,6 +65,4 @@ describe('Matches Routes', () => {
       expect(response.statusCode).toBe(204);
     });
   });
-
-  // Additional tests for error conditions and invalid inputs can be added here
 });
