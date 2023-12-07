@@ -124,19 +124,28 @@ const updatePlayer = async (req, res) => {
     const playerId = req.params.Player_ID;
     // Extract player details from the request body
     const player = {
-      name: req.body.Name,
-      position: req.body.Position,
-      playerId: playerId,
-      age: req.body.Age,
-      nationality: req.body.Nationality,
-      teamId: req.body.Team_ID,
-      height: req.body.Height,
+      Name: req.body.Name,
+      Position: req.body.Position,
+      Player_ID: playerId,
+      Age: req.body.Age,
+      Nationality: req.body.Nationality,
+      Team_ID: req.body.Team_ID,
+      Height: req.body.Height,
     };
-    const updatePlayer = await Players.replaceOne({ playerId: playerId }, player);
+    const updatePlayer = await Players.replaceOne({ Player_ID: playerId }, player);
     res.status(204).json(updatePlayer);
-  } catch {
+  } catch (error) {
     // Log the detailed error information
     console.error("Error updating player:", error);
+
+    if (error.name === "ValidationError") {
+      // Extract validation error messages and respond with a 400 status
+      const validationErrors = Object.values(error.errors).map(
+        (error) => error.message
+      );
+
+      return res.status(400).json({ errors: validationErrors });
+    }
 
     // Respond with a 500 Internal Server Error status and a more specific error message
     res.status(500).json({
@@ -149,9 +158,9 @@ const deletePlayer = async (req, res) => {
   //#swagger.tags=["players"]
   try {
     const playerId = req.params.Player_ID;
-    const deletePlayer = await Players.deleteOne({ playerId: playerId });
+    const deletePlayer = await Players.deleteOne({ Player_ID: playerId });
     res.status(204).json(deletePlayer);
-  } catch {
+  } catch (error) {
     // Log the detailed error information
     console.error("Error deleting player:", error);
 
