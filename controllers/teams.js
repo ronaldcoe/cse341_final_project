@@ -27,7 +27,7 @@ const getAllTeams = async (req, res) => {
 const getTeamById = async (req, res) => {
   //#swagger.tags=["teams"]
   try {
-    const teamId = req.params["Team ID"];
+    const teamId = req.params["Team_ID"];
     const oneTeam = await Teams.findById(teamId);
     res.status(200).json(oneTeam);
   } catch (error) {
@@ -53,11 +53,11 @@ const createTeam = async (req, res) => {
   try {
     // Extract team details from the request body
     const team = {
-      teamName: req.body["Team Name"],
-      coachId: req.body["Coach ID"],
+      teamName: req.body["Team_Name"],
+      coachId: req.body["Coach_ID"],
       location: req.body.Location,
-      teamId: req.body["Team ID"],
-      foundedYear: req.body["Founded Year"],
+      teamId: req.body["Team_ID"],
+      foundedYear: req.body["Founded_Year"],
     };
     const newTeam = await Teams.Create(team);
     res.status(204).json(newTeam);
@@ -85,16 +85,16 @@ const createTeam = async (req, res) => {
 const updateTeam = async (req, res) => {
   //#swagger.tags=["teams"]
   try {
-    const teamId = req.params["Team ID"];
+    const teamId = req.params["Team_ID"];
     // Extract team details from the request body
     const team = {
-      teamName: req.body["Team Name"],
-      coachId: req.body["Coach ID"],
+      teamName: req.body["Team_Name"],
+      coachId: req.body["Coach_ID"],
       location: req.body.Location,
       teamId: teamId,
-      foundedYear: req.body["Founded Year"],
+      foundedYear: req.body["Founded_Year"],
     };
-    const updatedTeam = await Teams.Update(team);
+    const updatedTeam = await Teams.replaceOne({ teamId: teamId }, team);
     res.status(204).json(updatedTeam);
   } catch (error) {
     // Log the detailed error information
@@ -119,8 +119,8 @@ const updateTeam = async (req, res) => {
 const deleteTeam = async (req, res) => {
   //#swagger.tags=["teams"]
   try {
-    const teamId = req.params["Team ID"];
-    const deletedTeam = await Teams.Delete(teamId);
+    const teamId = req.params["Team_ID"];
+    const deletedTeam = await Teams.deleteOne({ teamId: teamId });
     res.status(204).json(deletedTeam);
   } catch (error) {
     // Log the detailed error information
