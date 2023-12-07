@@ -4,9 +4,9 @@ const router = require("express").Router();
 const coachesController = require("../controllers/coaches");
 
 router.get("/", coachesController.getAllCoaches);
-router.get("/:Coach ID", coachesController.getCoachById);
+router.get("/:Coach_ID", coachesController.getCoachById);
 router.post("/", coachesController.createCoach);
-router.put("/:Coach ID", coachesController.updateCoach);
-router.delete("/:Coach ID", coachesController.deleteCoach);
+router.put("/:Coach_ID", coachesController.updateCoach);
+router.delete("/:Coach_ID", coachesController.deleteCoach);
 
 module.exports = router;
