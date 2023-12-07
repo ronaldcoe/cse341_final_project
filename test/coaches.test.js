@@ -1,9 +1,9 @@
 const request = require('supertest');
 const express = require('express');
-const router = require('./routes/coaches'); 
-const coachesController = require('./controllers/coaches'); 
+const router = require('../routes/coaches'); 
+const coachesController = require('../controllers/coaches'); 
 
-jest.mock('./controllers/coaches'); // Mock the coachesController
+jest.mock('../controllers/coaches'); // Mock the coachesController
 
 const app = express();
 app.use(express.json());
