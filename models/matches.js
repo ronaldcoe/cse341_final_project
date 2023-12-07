@@ -23,6 +23,10 @@ const matchSchema = new mongoose.Schema({
         validate: {
             //check if the array contains valid team ids
             validator: function (value) {
+                // Checks that the array contains 2 elements
+                if (value.length !== 2) {
+                    return false;
+                }
                 // Ensure that the value is an array of strings starting with 'T' followed by exactly 3 digits
                 for (let i = 0; i < value.length; i++) {
                     if (!/^T\d{3}$/.test(value[i])) {
@@ -31,7 +35,7 @@ const matchSchema = new mongoose.Schema({
                 }
             },
             message:
-                'Teams_Involved must be an array of strings starting with "T" followed by exactly 3 digits, like "T012".'
+                'Teams_Involved must be an array of two strings, each starting with "T" followed by exactly 3 digits, like "T012".'
         },
         message: "Teams_Involved must be an array of strings.",
     },
@@ -59,11 +63,11 @@ const matchSchema = new mongoose.Schema({
         validate: {
             validator: function (value) {
                 // Ensure that the array is composed of objects with the following properties:
-                // Player_Id: string starting with 'P' followed by exactly 3 digits
+                // Player_ID: string starting with 'P' followed by exactly 3 digits
                 // Time: string representing a number between 0 and 90 composed of 2 digits
                 try {
                     for (let i = 0; i < value.length; i++) {
-                        if (!/^P\d{3}$/.test(value[i].Player_Id) || !/^\d{2}$/.test(value[i].Time) || parseInt(value[i].Time) > 90) {
+                        if (!/^P\d{3}$/.test(value[i].Player_ID) || !/^\d{2}$/.test(value[i].Time) || parseInt(value[i].Time) > 90) {
                             return false;
                         }
                     }
@@ -73,11 +77,11 @@ const matchSchema = new mongoose.Schema({
                 }
             },
             message:
-                'Goals must be an array of objects with the following properties: Player_Id: string starting with "P" followed by exactly 3 digits, Time: string representing a number between 0 and 90 composed of 2 digits, like "P012", "45".'
+                'Goals must be an array of objects with the following properties: Player_ID: string starting with "P" followed by exactly 3 digits, Time: string representing a number between 0 and 90 composed of 2 digits, like "P012", "45".'
         },
     }
 });
 
-const Match = mongoose.model('matches', matchSchema);
+const Matches = mongoose.model('matches', matchSchema);
 
-module.exports = Match;
+module.exports = Matches;

@@ -74,6 +74,7 @@ const updateMatch = async (req, res) => {
 
     const matchId = req.params.Match_ID; // Assuming the param is named 'matchId'
     const matchData = {
+      Match_ID: matchId,
       Date: new Date(req.body.Date),
       Teams_Involved: req.body.Teams_Involved,
 
@@ -84,6 +85,7 @@ const updateMatch = async (req, res) => {
         Time: parseInt(goal.Time)
       })),
     };
+    await Matches.validate(matchData);
     const updatedMatch = await Matches.replaceOne({ Match_ID: matchId }, matchData);
     res.status(204).json(updatedMatch);
   } catch (error) {

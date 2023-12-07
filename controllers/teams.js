@@ -102,6 +102,7 @@ const updateTeam = async (req, res) => {
       Team_ID: teamId,
       Founded_Year: req.body.Founded_Year,
     };
+    await Teams.validate(team);
     const updatedTeam = await Teams.replaceOne({ Team_ID: teamId }, team);
     res.status(204).json(updatedTeam);
   } catch (error) {

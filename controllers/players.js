@@ -132,6 +132,7 @@ const updatePlayer = async (req, res) => {
       Team_ID: req.body.Team_ID,
       Height: req.body.Height,
     };
+    await Players.validate(player);
     const updatePlayer = await Players.replaceOne({ Player_ID: playerId }, player);
     res.status(204).json(updatePlayer);
   } catch (error) {

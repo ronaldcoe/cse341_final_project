@@ -61,13 +61,14 @@ const updateCoach = async (req, res) => {
     const coachId = req.params.Coach_ID;
     // Extract coach details from the request body
     const coach = {
-      Name: req.body.Name,
       Coach_ID: coachId,
+      Name: req.body.Name,
       Age: req.body.Age,
       Nationality: req.body.Nationality,
       Team_ID: req.body.Team_ID,
     };
-    const updatedCoach = await Coaches.replaceOne({ Coach_Id: coachId }, coach);
+    await Coaches.validate(coach);
+    const updatedCoach = await Coaches.replaceOne({ Coach_ID: coachId }, coach);
     res.status(204).json(updatedCoach);
   } catch (error){
     // Log the detailed error information
