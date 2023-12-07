@@ -67,12 +67,17 @@ db.mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    app.listen(port, () => {
-      console.log(`DB Connected and server running on ${port}.`);
-    });
+    if (process.env.NODE_ENV !== 'test') {
+      app.listen(port, () => {
+        console.log(`DB Connected and server running on ${port}.`);
+      });
+    }
     app.use("/", indexRouter);
   })
   .catch((err) => {
     console.log("Cannot connect to the database!", err);
     process.exit();
   });
+
+ 
+module.exports = app;
