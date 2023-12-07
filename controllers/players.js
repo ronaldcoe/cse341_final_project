@@ -26,20 +26,16 @@ const getAllPlayers = async (req, res) => {
 const getPlayerById = async (req, res) => {
   //#swagger.tags=["players"]
   try {
-    const playerId = req.params["Player_ID"];
+    const playerId = req.params.Player_ID;
     console.log("Player_ID:", playerId);
 
-    const onePlayer = await Players.findOne({ "Player_ID": playerId });
+    const onePlayer = await Players.findOne({ Player_ID: playerId });
     console.log("Found Player:", onePlayer);
-
-    // const position = req.params.Position;
-    // const playersByPosition = await Players.find({ Position: position });
 
     if (!onePlayer) {
       // If no player is found, respond with a 404 Not Found status
       return res.status(404).json({ error: "Player not found" });
     }
-
     // Respond with a 200 status and the player in the response body
     res.status(200).json(onePlayer);
   } catch (error) {
@@ -92,13 +88,13 @@ const createPlayer = async (req, res) => {
   try {
     // Extract player details from the request body
     const player = {
-      playerId: req.body["Player_ID"],
+      playerId: req.body.Player_ID,
       name: req.body.Name,
       age: req.body.Age,
       height: req.body.Height,
       nationality: req.body.Nationality,
       position: req.body.Position,
-      teamId: req.body["Team_ID"],
+      teamId: req.body.Team_ID,
     };
     const newPlayer = await Players.create(player);
     res.status(204).json(newPlayer);
@@ -125,7 +121,7 @@ const createPlayer = async (req, res) => {
 const updatePlayer = async (req, res) => {
   //#swagger.tags=["players"]
   try {
-    const playerId = req.params["Player_ID"];
+    const playerId = req.params.Player_ID;
     // Extract player details from the request body
     const player = {
       name: req.body.Name,
@@ -133,7 +129,7 @@ const updatePlayer = async (req, res) => {
       playerId: playerId,
       age: req.body.Age,
       nationality: req.body.Nationality,
-      teamId: req.body["Team_ID"],
+      teamId: req.body.Team_ID,
       height: req.body.Height,
     };
     const updatePlayer = await Players.Update(player);
@@ -152,7 +148,7 @@ const updatePlayer = async (req, res) => {
 const deletePlayer = async (req, res) => {
   //#swagger.tags=["players"]
   try {
-    const playerId = req.params["Player_ID"];
+    const playerId = req.params.Player_ID;
     const deletePlayer = await Players.Delete(playerId);
     res.status(204).json(deletePlayer);
   } catch {
@@ -172,5 +168,5 @@ module.exports = {
   getPlayerById,
   createPlayer,
   updatePlayer,
-  deletePlayer,
+  deletePlayer
 };
