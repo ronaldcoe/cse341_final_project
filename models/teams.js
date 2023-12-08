@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const teamSchema = new mongoose.Schema({
-  teamId: {
+  Team_ID: {
     type: String,
     validate: {
       validator: function (value) {
@@ -12,7 +12,7 @@ const teamSchema = new mongoose.Schema({
         'TeamId must be a string starting with "T" followed by exactly 3 digits, like "T012".',
     },
   },
-  teamName: {
+  Team_Name: {
     type: String,
     required: true,
     maxLength: 25, // Adjusted maximum length to 25 characters
@@ -24,7 +24,7 @@ const teamSchema = new mongoose.Schema({
         "Team Name must be a non-empty string with a maximum length of 25 characters.", // Updated error message
     },
   },
-  location: {
+  Location: {
     type: String,
     required: true,
     maxLength: 20, // Adjusted maximum length to 20 characters
@@ -37,7 +37,7 @@ const teamSchema = new mongoose.Schema({
     },
   },
 
-  foundedYear: {
+  Founded_Year: {
     type: String,
     validate: {
       validator: function (value) {
@@ -54,7 +54,7 @@ const teamSchema = new mongoose.Schema({
         "Founded Year must be a string of exactly 4 integer digits, like '2022'.",
     },
   },
-  coachId: {
+  Coach_ID: {
     type: String,
     validate: {
       validator: function (value) {

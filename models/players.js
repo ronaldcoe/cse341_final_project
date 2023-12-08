@@ -10,8 +10,8 @@ const playerSchema = new mongoose.Schema({
   //   height: { type: String, required: true, maxLength: 9 },
   // });
 
-  playerId: { type: String, required: true, maxLength: 5 },
-  name: {
+  Player_ID: { type: String, required: true, maxLength: 5 },
+  Name: {
     type: String,
     required: true,
     maxLength: 25, // Adjusted maximum length to 25 characters
@@ -23,19 +23,7 @@ const playerSchema = new mongoose.Schema({
         "Name must be a non-empty string with a maximum length of 25 characters.", // Updated error message
     },
   },
-  // age: {
-  //   type: Number,
-  //   required: true,
-  //   validate: {
-  //     validator: function (value) {
-  //       // Ensure that the age is a number and is greater than or equal to 14
-  //       return Number.isInteger(value) && value >= 14;
-  //     },
-  //     message: "Age must be a number greater than or equal to 14.",
-  //   },
-  // },
-
-  age: {
+  Age: {
     type: String,
     required: true,
     validate: {
@@ -54,19 +42,20 @@ const playerSchema = new mongoose.Schema({
     },
   },
 
-  height: {
+  Height: {
     type: String,
     required: true,
     validate: {
       validator: function (value) {
-        // Custom validation logic for the height field
-        return /^\d{1,2}ft \d{1,2}in$/.test(value);
+        // Custom validation logic for the height field in centimeters with exactly three digits
+        return /^\d{3}cm$/.test(value);
       },
       message:
-        "Height must be a string in the format '#(#)ft #(#)in', where #(#) are one or two-digit numbers.",
+        "Height must be a string in the format of exactly three-digit numbers followed by 'cm'. Example: '123cm'.",
     },
   },
-  nationality: {
+
+  Nationality: {
     type: String,
     required: true,
     maxLength: 25,
@@ -78,7 +67,7 @@ const playerSchema = new mongoose.Schema({
       message: "Nationality must be a string with no more than 25 characters.",
     },
   },
-  position: {
+  Position: {
     type: String,
     required: true,
     maxLength: 15,
@@ -91,7 +80,7 @@ const playerSchema = new mongoose.Schema({
         "Position must be a string with no numbers and a maximum length of 15 characters.",
     },
   },
-  teamId: {
+  Team_ID: {
     type: String,
     validate: {
       validator: function (value) {
@@ -103,7 +92,6 @@ const playerSchema = new mongoose.Schema({
     },
   },
 });
-
 
 const Players = mongoose.model("players", playerSchema);
 
