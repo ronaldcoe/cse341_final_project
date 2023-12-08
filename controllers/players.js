@@ -86,13 +86,13 @@ const createPlayer = async (req, res) => {
   try {
     // Extract player details from the request body
     const player = {
-      playerId: req.body.Player_ID,
-      name: req.body.Name,
-      age: req.body.Age,
-      height: req.body.Height,
-      nationality: req.body.Nationality,
-      position: req.body.Position,
-      teamId: req.body.Team_ID,
+      Player_ID: req.body.Player_ID,
+      Name: req.body.Name,
+      Age: req.body.Age,
+      Height: req.body.Height,
+      Nationality: req.body.Nationality,
+      Position: req.body.Position,
+      Team_ID: req.body.Team_ID,
     };
     const newPlayer = await Players.create(player);
     res.status(204).json(newPlayer);
@@ -163,6 +163,15 @@ const deletePlayer = async (req, res) => {
     // Log the detailed error information
     console.error("Error deleting player:", error);
 
+    if (error.name === "ValidationError") {
+      // Extract validation error messages and respond with a 400 status
+      const validationErrors = Object.values(error.errors).map(
+        (error) => error.message
+      );
+
+      return res.status(400).json({ errors: validationErrors });
+    }
+
     // Respond with a 500 Internal Server Error status and a more specific error message
     res.status(500).json({
       error: "Error deleting player. Check the server logs for more details.",
@@ -176,5 +185,5 @@ module.exports = {
   getPlayerById,
   createPlayer,
   updatePlayer,
-  deletePlayer
+  deletePlayer,
 };

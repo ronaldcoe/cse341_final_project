@@ -8,6 +8,7 @@ jest.mock('../controllers/players'); // Mock the playersController
 const app = express();
 app.use(express.json());
 app.use('/players', router);
+app.get('/players/position/:Position', playersController.getPlayersByPosition); 
 
 describe('Players Routes', () => {
   describe('GET /players', () => {
@@ -31,15 +32,17 @@ describe('Players Routes', () => {
       expect(response.body).toEqual(mockPlayer);
     });
   });
-  describe('GET /players/:Position', () => {
+
+
+  describe('GET /players/position/:Position', () => {
     test('should fetch players by position', async () => {
       const position = 'Goalkeeper';
       const mockPlayers = [{ playerId: 'P003', name: 'Player C', position: position }];
       playersController.getPlayersByPosition.mockImplementation((req, res) => res.status(200).json(mockPlayers));
-  
-      const response = await request(app).get(`/players/${position}`);
+
+      const response = await request(app).get(`/players/position/${position}`);
       expect(response.statusCode).toBe(200);
-      expect(response.body).toEqual(mockPlayers); // Expecting an array
+      expect(response.body).toEqual(mockPlayers); 
     });
   });
   
@@ -76,6 +79,4 @@ describe('Players Routes', () => {
       expect(response.statusCode).toBe(204);
     });
   });
-
-  // Additional tests for error conditions and invalid inputs can be added here
 });
