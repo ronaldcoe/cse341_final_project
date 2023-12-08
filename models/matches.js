@@ -83,5 +83,4 @@ const matchSchema = new mongoose.Schema({
 });
 
 const Matches = mongoose.model('matches', matchSchema);
-
 module.exports = Matches;
