@@ -132,9 +132,10 @@ const updatePlayer = async (req, res) => {
       Team_ID: req.body.Team_ID,
       Height: req.body.Height,
     };
-    const updatePlayer = await Players.Update(player);
+    await Players.validate(player);
+    const updatePlayer = await Players.replaceOne({ Player_ID: playerId }, player);
     res.status(204).json(updatePlayer);
-  } catch {
+  } catch (error) {
     // Log the detailed error information
     console.error("Error updating player:", error);
 
@@ -158,9 +159,9 @@ const deletePlayer = async (req, res) => {
   //#swagger.tags=["players"]
   try {
     const playerId = req.params.Player_ID;
-    const deletePlayer = await Players.Delete(playerId);
+    const deletePlayer = await Players.deleteOne({ Player_ID: playerId });
     res.status(204).json(deletePlayer);
-  } catch {
+  } catch (error) {
     // Log the detailed error information
     console.error("Error deleting player:", error);
 

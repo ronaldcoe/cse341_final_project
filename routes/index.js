@@ -9,8 +9,6 @@ router.get('/', (req, res) => {
     res.render('index', {user: req.session.user});
 });
 
-
-
 // login route
 router.use('/login', passport.authenticate('github'), (req, res) => {});
 
@@ -24,9 +22,6 @@ router.use('/logout', (req, res) => {
     })
    
 })
-
-
-//router.use("/", require("./swagger"));  // Use the "/api-docs" route defined in the "swagger" module
 
 
 // Use the "/teams" route defined in the "teams" module
