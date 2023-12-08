@@ -110,6 +110,15 @@ const updateCoach = async (req, res) => {
   
     // Log the detailed error information
     console.error("Error updating coach:", error);
+     // Check if the error is a Mongoose validation error
+     if (error.name === "ValidationError") {
+      // Extract validation error messages and respond with a 400 status
+      const validationErrors = Object.values(error.errors).map(
+        (error) => error.message
+      );
+
+      return res.status(400).json({ errors: validationErrors });
+    }
 
     // Respond with a 500 Internal Server Error status and a more specific error message
     res.status(500).json({
