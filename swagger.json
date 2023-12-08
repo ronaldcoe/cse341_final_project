@@ -5,10 +5,10 @@
     "description": "API for NodeJS",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "cse341-final-project-j17k.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/": {
@@ -36,7 +36,7 @@
         "tags": [
           "teams"
         ],
-        "description": "",
+        "description": "Retrieve information about all teams",
         "responses": {
           "200": {
             "description": "OK"
@@ -53,7 +53,7 @@
         "tags": [
           "teams"
         ],
-        "description": "",
+        "description": "Create a new team",
         "parameters": [
           {
             "name": "body",
@@ -61,7 +61,19 @@
             "schema": {
               "type": "object",
               "properties": {
+                "Team_Name": {
+                  "example": "any"
+                },
+                "Coach_ID": {
+                  "example": "any"
+                },
                 "Location": {
+                  "example": "any"
+                },
+                "Team_ID": {
+                  "example": "any"
+                },
+                "Founded_Year": {
                   "example": "any"
                 }
               }
@@ -81,15 +93,15 @@
         }
       }
     },
-    "/teams/{TeamID}": {
+    "/teams/{Team_ID}": {
       "get": {
         "tags": [
           "teams"
         ],
-        "description": "",
+        "description": "Retrieve information about teams by Team_ID",
         "parameters": [
           {
-            "name": "TeamID",
+            "name": "Team_ID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -102,6 +114,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -111,10 +126,10 @@
         "tags": [
           "teams"
         ],
-        "description": "",
+        "description": "Update information about teams by Team_ID",
         "parameters": [
           {
-            "name": "TeamID",
+            "name": "Team_ID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -125,7 +140,16 @@
             "schema": {
               "type": "object",
               "properties": {
+                "Team_Name": {
+                  "example": "any"
+                },
+                "Coach_ID": {
+                  "example": "any"
+                },
                 "Location": {
+                  "example": "any"
+                },
+                "Founded_Year": {
                   "example": "any"
                 }
               }
@@ -148,10 +172,10 @@
         "tags": [
           "teams"
         ],
-        "description": "",
+        "description": "Delete a team by Team_ID",
         "parameters": [
           {
-            "name": "TeamID",
+            "name": "Team_ID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -160,6 +184,9 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -172,7 +199,7 @@
         "tags": [
           "players"
         ],
-        "description": "",
+        "description": "Retrieve information all players",
         "responses": {
           "200": {
             "description": "OK"
@@ -189,7 +216,7 @@
         "tags": [
           "players"
         ],
-        "description": "",
+        "description": "Create a new player and assign to a team",
         "parameters": [
           {
             "name": "body",
@@ -197,6 +224,9 @@
             "schema": {
               "type": "object",
               "properties": {
+                "Player_ID": {
+                  "example": "any"
+                },
                 "Name": {
                   "example": "any"
                 },
@@ -210,6 +240,9 @@
                   "example": "any"
                 },
                 "Position": {
+                  "example": "any"
+                },
+                "Team_ID": {
                   "example": "any"
                 }
               }
@@ -229,15 +262,15 @@
         }
       }
     },
-    "/players/{PlayerID}": {
+    "/players/{Player_ID}": {
       "get": {
         "tags": [
           "players"
         ],
-        "description": "",
+        "description": "Retrieve information about a player by Player_ID",
         "parameters": [
           {
-            "name": "PlayerID",
+            "name": "Player_ID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -262,10 +295,10 @@
         "tags": [
           "players"
         ],
-        "description": "",
+        "description": "Update information about a player by Player_ID",
         "parameters": [
           {
-            "name": "PlayerID",
+            "name": "Player_ID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -288,6 +321,9 @@
                 "Nationality": {
                   "example": "any"
                 },
+                "Team_ID": {
+                  "example": "any"
+                },
                 "Height": {
                   "example": "any"
                 }
@@ -299,6 +335,9 @@
           "204": {
             "description": "No Content"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -308,10 +347,10 @@
         "tags": [
           "players"
         ],
-        "description": "",
+        "description": "Delete information about a player by Player_ID",
         "parameters": [
           {
-            "name": "PlayerID",
+            "name": "Player_ID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -320,6 +359,9 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -332,7 +374,7 @@
         "tags": [
           "players"
         ],
-        "description": "",
+        "description": "Retrieve information about a player by Position",
         "parameters": [
           {
             "name": "Position",
@@ -359,10 +401,13 @@
         "tags": [
           "coaches"
         ],
-        "description": "",
+        "description": "Retrieve information about all coaches",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -373,7 +418,7 @@
         "tags": [
           "coaches"
         ],
-        "description": "",
+        "description": "Create a new coach details and assign to a team",
         "parameters": [
           {
             "name": "body",
@@ -384,10 +429,16 @@
                 "Name": {
                   "example": "any"
                 },
+                "Coach_ID": {
+                  "example": "any"
+                },
                 "Age": {
                   "example": "any"
                 },
                 "Nationality": {
+                  "example": "any"
+                },
+                "Team_ID": {
                   "example": "any"
                 }
               }
@@ -398,21 +449,24 @@
           "204": {
             "description": "No Content"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       }
     },
-    "/coaches/{CoachID}": {
+    "/coaches/{Coach_ID}": {
       "get": {
         "tags": [
           "coaches"
         ],
-        "description": "",
+        "description": "Retrieve information about a coach by Coach_ID",
         "parameters": [
           {
-            "name": "CoachID",
+            "name": "Coach_ID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -421,6 +475,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"
@@ -434,10 +491,10 @@
         "tags": [
           "coaches"
         ],
-        "description": "",
+        "description": "Update information about a coach by Coach_ID",
         "parameters": [
           {
-            "name": "CoachID",
+            "name": "Coach_ID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -456,6 +513,9 @@
                 },
                 "Nationality": {
                   "example": "any"
+                },
+                "Team_ID": {
+                  "example": "any"
                 }
               }
             }
@@ -464,6 +524,9 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -474,10 +537,10 @@
         "tags": [
           "coaches"
         ],
-        "description": "",
+        "description": "Delete a coach by Coach_ID",
         "parameters": [
           {
-            "name": "CoachID",
+            "name": "Coach_ID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -486,6 +549,9 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -498,10 +564,13 @@
         "tags": [
           "matches"
         ],
-        "description": "",
+        "description": "Retrieve information about all matches",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -512,7 +581,7 @@
         "tags": [
           "matches"
         ],
-        "description": "",
+        "description": "Create a new match details and assign to a team(s)",
         "parameters": [
           {
             "name": "body",
@@ -520,7 +589,13 @@
             "schema": {
               "type": "object",
               "properties": {
+                "Match_ID": {
+                  "example": "any"
+                },
                 "Date": {
+                  "example": "any"
+                },
+                "Teams_Involved": {
                   "example": "any"
                 },
                 "Score": {
@@ -540,21 +615,24 @@
           "201": {
             "description": "Created"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       }
     },
-    "/matches/{MatchID}": {
+    "/matches/{Match_ID}": {
       "get": {
         "tags": [
           "matches"
         ],
-        "description": "",
+        "description": "Retrieve information about a match by Match_ID",
         "parameters": [
           {
-            "name": "MatchID",
+            "name": "Match_ID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -563,6 +641,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -573,10 +654,10 @@
         "tags": [
           "matches"
         ],
-        "description": "",
+        "description": "Update information about a match by Match_ID",
         "parameters": [
           {
-            "name": "MatchID",
+            "name": "Match_ID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -588,6 +669,9 @@
               "type": "object",
               "properties": {
                 "Date": {
+                  "example": "any"
+                },
+                "Teams_Involved": {
                   "example": "any"
                 },
                 "Score": {
@@ -604,8 +688,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -616,10 +703,10 @@
         "tags": [
           "matches"
         ],
-        "description": "",
+        "description": "Deelte a match by Match_ID",
         "parameters": [
           {
-            "name": "MatchID",
+            "name": "Match_ID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -629,21 +716,24 @@
           "204": {
             "description": "No Content"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       }
     },
-    "/matches/{TeamID}": {
+    "/matches/{Team_ID}": {
       "get": {
         "tags": [
           "matches"
         ],
-        "description": "",
+        "description": "Retrieve information about a match by Team_ID",
         "parameters": [
           {
-            "name": "TeamID",
+            "name": "Team_ID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -652,6 +742,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"

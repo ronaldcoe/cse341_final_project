@@ -64,6 +64,4 @@ describe('Teams Routes', () => {
       expect(response.statusCode).toBe(204);
     });
   });
-
-  // Additional tests for error conditions and invalid inputs can be added here
 });

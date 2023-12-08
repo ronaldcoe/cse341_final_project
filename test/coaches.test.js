@@ -147,7 +147,6 @@ describe('Coaches Routes', () => {
               expect(response.body.error).toBe('Coach not found');
             });
         
-            // Additional tests can be added for other scenarios, like invalid CoachID format
           });
         
           // ... 
