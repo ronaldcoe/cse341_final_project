@@ -1,0 +1,76 @@
+###
+GET http://localhost:3000/players
+
+###
+GET http://localhost:3000/players/P002
+
+####
+POST http://localhost:3000/players
+Content-Type: application/json
+
+{
+  "Age": "21",
+  "Height": "198cm",
+  "Name": "Garon RamsTale",
+  "Nationality": "Never Never Land",
+  "Position": "Goalkeeper",
+  "Player_ID": "P097",
+  "Team_ID": "T005"
+}
+
+###
+PUT http://localhost:3000/players/P097
+Content-Type: application/json
+
+{
+  "Age": "24",
+  "Height": "200cm",
+  "Name": "Garon RamsTale",
+  "Nationality": "Canada",
+  "Position": "Goalkeeper",
+  "Player_ID": "P097",
+  "Team_ID": "T005"
+}
+
+###
+DELETE http://localhost:3000/players/P097
+
+
+
+###
+GET https://cse341-final-project-j17k.onrender.com/players
+
+###
+GET https://cse341-final-project-j17k.onrender.com/players/P002
+
+###
+POST https://cse341-final-project-j17k.onrender.com/players
+Content-Type: application/json
+
+{
+  "Age": "21",
+  "Height": "198cm",
+  "Name": "Garon RamsTale",
+  "Nationality": "Never Never Land",
+  "Position": "Goalkeeper",
+  "Player_ID": "P097",
+  "Team_ID": "T005"
+}
+
+
+###
+PUT https://cse341-final-project-j17k.onrender.com/players/P097
+Content-Type: application/json
+
+{
+  "Age": "24",
+  "Height": "200cm",
+  "Name": "Garon RamsTale",
+  "Nationality": "Canada",
+  "Position": "Goalkeeper",
+  "Player_ID": "P097",
+  "Team_ID": "T005"
+}
+
+###
+DELETE https://cse341-final-project-j17k.onrender.com/players/P097

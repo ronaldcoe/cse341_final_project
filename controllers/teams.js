@@ -55,17 +55,16 @@ const getTeamById = async (req, res) => {
   }
 };
 
-
 const createTeam = async (req, res) => {
   //#swagger.tags=["teams"]
   try {
     // Extract team details from the request body
     const team = {
-      teamName: req.body.Team_Name,
-      coachId: req.body.Coach_ID,
-      location: req.body.Location,
-      teamId: req.body.Team_ID,
-      foundedYear: req.body.Founded_Year,
+      Team_Name: req.body.Team_Name,
+      Coach_ID: req.body.Coach_ID,
+      Location: req.body.Location,
+      Team_ID: req.body.Team_ID,
+      Founded_Year: req.body.Founded_Year,
     };
     const newTeam = await Teams.create(team);
     res.status(204).json(newTeam);
@@ -96,11 +95,11 @@ const updateTeam = async (req, res) => {
     const teamId = req.params.Team_ID;
     // Extract team details from the request body
     const team = {
-      teamName: req.body.Team_Name,
-      coachId: req.body.Coach_ID,
-      location: req.body.Location,
-      teamId: teamId,
-      foundedYear: req.body.Founded_Year,
+      Team_Name: req.body.Team_Name,
+      Coach_ID: req.body.Coach_ID,
+      Location: req.body.Location,
+      Team_ID: teamId,
+      Founded_Year: req.body.Founded_Year,
     };
     const updatedTeam = await Teams.Update(team);
     res.status(204).json(updatedTeam);
@@ -133,6 +132,16 @@ const deleteTeam = async (req, res) => {
   } catch (error) {
     // Log the detailed error information
     console.error("Error deleting team:", error);
+
+    // Check if the error is a Mongoose validation error
+    if (error.name === "ValidationError") {
+      // Extract validation error messages and respond with a 400 status
+      const validationErrors = Object.values(error.errors).map(
+        (error) => error.message
+      );
+
+      return res.status(400).json({ errors: validationErrors });
+    }
 
     // Respond with a 500 Internal Server Error status and a more specific error message
     res.status(500).json({

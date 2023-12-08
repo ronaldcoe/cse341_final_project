@@ -1,0 +1,69 @@
+###
+GET http://localhost:3000/coaches
+
+###
+GET http://localhost:3000/coaches/C005
+
+####
+POST http://localhost:3000/coaches
+Content-Type: application/json
+
+{
+  "Coach_ID": "C091",
+  "Name": "Jamal Cammel",
+  "Age": "78",
+  "Nationality": "Gustralia",
+  "Team_ID": "T091"
+}
+
+
+###
+PUT http://localhost:3000/coaches/C099
+Content-Type: application/json
+
+{
+  "Coach_ID": "C099",
+  "Name": "Jamal Jammel",
+  "Age": "89",
+  "Nationality": "Austria",
+  "Team_ID": "T099"
+}
+
+
+###
+DELETE http://localhost:3000/coaches/C099
+
+
+###
+GET https://cse341-final-project-j17k.onrender.com/coaches
+
+###
+GET https://cse341-final-project-j17k.onrender.com/coaches/C002
+
+###
+POST https://cse341-final-project-j17k.onrender.com/coaches
+Content-Type: application/json
+
+{
+  "Coach_ID": "C099",
+  "Name": "Jamal Hammel",
+  "Age": "78",
+  "Nationality": "Australia",
+  "Team_ID": "T099"
+}
+
+###
+PUT https://cse341-final-project-j17k.onrender.com/coaches/C099
+Content-Type: application/json
+
+{
+  "Coach_ID": "C099",
+  "Name": "Jamal Jammel",
+  "Age": "89",
+  "Nationality": "Austria",
+  "Team_ID": "T099"
+}
+
+
+###
+DELETE https://cse341-final-project-j17k.onrender.com/coaches/C099

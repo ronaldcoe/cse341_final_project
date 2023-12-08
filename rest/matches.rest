@@ -1,0 +1,108 @@
+###
+GET http://localhost:3000/matches
+
+###
+GET http://localhost:3000/matches/M002
+
+####
+POST http://localhost:3000/matches
+Content-Type: application/json
+
+{
+  "Match_ID": "M092",
+  "Date": "2023-12-05",
+  "Score": "5-0",
+  "Stadium": "Inside London Bridge Stadium",
+  "Goals": [
+    {
+      "Player_ID": "P001",
+      "Time": 20
+    },
+    {
+      "Player_ID": "P002",
+      "Time": 35
+    },
+    {
+      "Player_ID": "P003",
+      "Time": 50
+    }
+  ],
+  "Teams_Involved": ["T001", "T002"]
+}
+  
+
+###
+PUT http://localhost:3000/matches
+Content-Type: application/json
+
+{
+  "Match_ID": "M092",
+  "Date": "2023-12-12",
+  "Score": "3-0",
+  "Stadium": "Inside London Bridge Stadium",
+  "Goals": [
+    {
+      "Player_ID": "P004",
+      "Time": 20
+    },
+    {
+      "Player_ID": "P005",
+      "Time": 35
+    },
+    {
+      "Player_ID": "P006",
+      "Time": 50
+    }
+  ],
+  "Teams_Involved": ["T003", "T004"]
+}
+
+###
+DELETE http://localhost:3000/matches/M092
+
+
+
+###
+GET https://cse341-final-project-j17k.onrender.com/matches
+
+###
+GET https://cse341-final-project-j17k.onrender.com/matches/M002
+
+###
+POST https://cse341-final-project-j17k.onrender.com/matches
+Content-Type: application/json
+
+{
+  "Match_ID": "M099",
+  "Date": "2022-12-15",
+  "Score": "5-0",
+  "Stadium": "Outside London Stadium",
+  "Goals": [
+    {"Player_ID": "P004", "Time": "15"},
+    {"Player_ID": "P005", "Time": "30"},
+    {"Player_ID": "P006", "Time": "45"}
+  ],
+  "Teams_Involved": ["T003", "T004"]
+}
+
+
+
+###
+PUT https://cse341-final-project-j17k.onrender.com/matches/M099
+Content-Type: application/json
+
+{
+  "Match_ID": "M099",
+  "Date": "2022-10-15",
+  "Score": "3-0",
+  "Stadium": "On London Bridge Stadium",
+  "Goals": [
+    {"Player_ID": "P004", "Time": "15"},
+    {"Player_ID": "P005", "Time": "30"},
+    {"Player_ID": "P006", "Time": "45"}
+  ],
+  "Teams_Involved": ["T003", "T004"]
+}
+
+###
+DELETE https://cse341-final-project-j17k.onrender.com/matches/M099
