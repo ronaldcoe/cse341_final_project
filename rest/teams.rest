@@ -1,25 +1,66 @@
 ###
+GET http://localhost:3000/teams
+
+###
+GET http://localhost:3000/teams/T002
+
+
+###
 POST http://localhost:3000/teams 
 Content-Type: application/json
 
-    {
-    "Team ID": "T090",
-    "Team Name": "Suits",
-    "Location": "Mikes Office",
-    "Founded Year": "2003",
-    "Coach ID": "C005"
-  }
+{
+  "Team_ID": "T090",
+  "Team_Name": "Suits",
+  "Location": "Mikes Office",
+  "Founded_Year": "2003",
+  "Coach_ID": "C005"
+}
 
-####
-POST http://localhost:3000/players
+###
+PUT http://localhost:3000/teams
 Content-Type: application/json
 
 {
-    "Name": "Can't touch this",
-    "Age": "55",
-    "Height": "8ft 6in",
-    "Nationality": "Mine Precious",
-    "Position": "Defense",
-    "Team Id": "901",
-    "Player ID": 88
-  }
+  "Team_ID": "T089",
+  "Team_Name": "Suits",
+  "Location": "Harvey's Office",
+  "Founded_Year": "2000",
+  "Coach_ID": "C005"
+}
+
+###
+DELETE http://localhost:3000/teams
+
+###
+GET https://cse341-final-project-j17k.onrender.com/teams
+
+###
+GET https://cse341-final-project-j17k.onrender.com/teams/T002
+
+###
+POST https://cse341-final-project-j17k.onrender.com/teams
+Content-Type: application/json
+
+{
+  "Team_ID": "T090",
+  "Team_Name": "Suits",
+  "Location": "Mikes Office",
+  "Founded_Year": "2003",
+  "Coach_ID": "C005"
+}
+
+###
+PUT https://cse341-final-project-j17k.onrender.com/teams/T090
+Content-Type: application/json
+
+{
+  "Team_ID": "T089",
+  "Team_Name": "Suits",
+  "Location": "Harvey's Office",
+  "Founded_Year": "2000",
+  "Coach_ID": "C005"
+}
+
+###
+DELETE https://cse341-final-project-j17k.onrender.com/teams/T089
