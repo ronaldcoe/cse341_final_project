@@ -28,7 +28,7 @@ const getTeamById = async (req, res) => {
   //#swagger.tags=["teams"]
   try {
     const teamId = req.params.Team_ID;
-    const oneTeam = await Teams.findById(teamId);
+    const oneTeam = await Teams.findOne({ Team_ID: teamId });
 
     // Check if oneTeam is null, indicating no team was found for the given ID
     if (!oneTeam) {

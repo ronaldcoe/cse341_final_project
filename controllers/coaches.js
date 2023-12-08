@@ -18,7 +18,7 @@ const getCoachById = async (req, res) => {
   //#swagger.tags=["coaches"]
   try {
     const coachId = req.params.Coach_ID;
-    const oneCoach = await Coaches.findById(coachId);
+    const oneCoach = await Coaches.findOne({ Coach_ID: coachId });
     if (!oneCoach) {
       return res.status(404).json({ error: "Coach not found" });
     }

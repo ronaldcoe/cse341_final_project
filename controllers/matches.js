@@ -20,7 +20,10 @@ const getMatchById = async (req, res) => {
   //#swagger.tags=["matches"]
   try {
     const matchId = req.params.Match_ID;
-    const match = await Matches.findById(matchId);
+    const match = await Matches.findOne({ Match_ID: matchId });
+    if (!match) {
+      return res.status(404).json({ error: "Match not found" });
+    }
     res.status(200).json(match);
   } catch (error) {
     console.error("Error fetching match:", error);
