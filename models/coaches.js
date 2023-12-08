@@ -1,46 +1,49 @@
 const mongoose = require("mongoose");
 
 const coachSchema = new mongoose.Schema({
-  coachId: {
+  Coach_ID: {
     type: String,
-    required: true,
-    maxLength: 5, //Maximun length of coachId
     validate: {
       validator: function (value) {
-        return /^C\d{3}$/.test(value); // Assuming Coach ID starts with 'C' followed by 3 digits
+        // Ensure that the value is a string starting with 'C' followed by exactly 3 digits
+        return /^C\d{3}$/.test(value);
       },
-      message: 'Coach ID must be a string starting with "C" followed by 3 digits.',
+      message:
+        'Coach_ID must be a string starting with "C" followed by exactly 3 digits, like "C012".',
     },
   },
-  name: {
+  Name: {
     type: String,
+    maxLength: 25,
     required: true,
-    maxLength: 50, // Maximum length of coach name
+    message: "Name must be a string with no more than 25 characters.",
   },
-  age: {
+  Age: {
     type: Number,
-    required: true,
     validate: {
-      validator: function (value) {
-        return value > 0 && value < 100; // Assuming age range between 1 to 99
-      },
-      message: 'Age must be a valid number between 1 and 99.',
+      validator: Number.isInteger,
+      message: "Age must be an integer.",
     },
-  },
-  nationality: {
-    type: String,
+    min: 18,
+    max: 99,
     required: true,
-    maxLength: 30, ///Length of the coach nationality
+    message: "Age must be a number between 18 and 99.",
   },
-  teamId: {
+  Nationality: {
     type: String,
+    maxLength: 25,
     required: true,
-    maxLength: 4,
+    message: "Nationality must be a string with no more than 25 characters.",
+  },
+  Team_ID: {
+    type: String,
     validate: {
       validator: function (value) {
-        return /^T\d{3}$/.test(value); // Ensuring the Team ID starts with 'T' followed by exactly 3 digits
+        // Ensure that the value is a string starting with 'T' followed by exactly 3 digits
+        return /^T\d{3}$/.test(value);
       },
-      message: 'Team ID must be a string starting with "T" followed by exactly 3 digits.',
+      message:
+        'Team_ID must be a string starting with "T" followed by exactly 3 digits, like "T012".',
     },
   },
 });
