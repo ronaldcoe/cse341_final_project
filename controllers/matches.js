@@ -74,20 +74,32 @@ const updateMatch = async (req, res) => {
 
     const matchId = req.params.Match_ID; // Assuming the param is named 'matchId'
     const matchData = {
-      date: new Date(req.body.Date),
-      teamsInvolved: req.body.Teams_Involved,
+      Match_ID: matchId,
+      Date: new Date(req.body.Date),
+      Teams_Involved: req.body.Teams_Involved,
 
-      score: req.body.Score,
-      stadium: req.body.Stadium,
-      goals: req.body.Goals.map(goal => ({
-        playerId: goal.Player_ID,
-        time: parseInt(goal.Time)
+      Score: req.body.Score,
+      Stadium: req.body.Stadium,
+      Goals: req.body.Goals.map(goal => ({
+        Player_ID: goal.Player_ID,
+        Time: parseInt(goal.Time)
       })),
     };
-    const updatedMatch = await Matches.findOneAndUpdate({ matchId }, matchData, { new: true });
-    res.status(200).json(updatedMatch); // 200 for successful update
+    await Matches.validate(matchData);
+    const updatedMatch = await Matches.replaceOne({ Match_ID: matchId }, matchData);
+    res.status(204).json(updatedMatch);
   } catch (error) {
     console.error("Error updating match:", error);
+
+    if (error.name === "ValidationError") {
+      // Extract validation error messages and respond with a 400 status
+      const validationErrors = Object.values(error.errors).map(
+        (error) => error.message
+      );
+
+      return res.status(400).json({ errors: validationErrors });
+    }
+
     res.status(500).json({
       error: "Error updating match. Check the server logs for more details.",
     });
@@ -98,7 +110,7 @@ const deleteMatch = async (req, res) => {
   //#swagger.tags=["matches"]
   try {
     const matchId = req.params.Match_ID;
-    const deletedMatch = await Matches.Delete(matchId);
+    const deletedMatch = await Matches.deleteOne({ Match_ID: matchId });
     res.status(204).json(deletedMatch);
   } catch (error) {
     console.error("Error deleting match:", error);

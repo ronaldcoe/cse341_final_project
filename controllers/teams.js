@@ -96,13 +96,14 @@ const updateTeam = async (req, res) => {
     const teamId = req.params.Team_ID;
     // Extract team details from the request body
     const team = {
-      teamName: req.body.Team_Name,
-      coachId: req.body.Coach_ID,
-      location: req.body.Location,
-      teamId: teamId,
-      foundedYear: req.body.Founded_Year,
+      Team_Name: req.body.Team_Name,
+      Coach_ID: req.body.Coach_ID,
+      Location: req.body.Location,
+      Team_ID: teamId,
+      Founded_Year: req.body.Founded_Year,
     };
-    const updatedTeam = await Teams.Update(team);
+    await Teams.validate(team);
+    const updatedTeam = await Teams.replaceOne({ Team_ID: teamId }, team);
     res.status(204).json(updatedTeam);
   } catch (error) {
     // Log the detailed error information
@@ -127,8 +128,8 @@ const updateTeam = async (req, res) => {
 const deleteTeam = async (req, res) => {
   //#swagger.tags=["teams"]
   try {
-    const teamId = req.paramsTeam_ID;
-    const deletedTeam = await Teams.Delete(teamId);
+    const teamId = req.params.Team_ID;
+    const deletedTeam = await Teams.deleteOne({ Team_ID: teamId });
     res.status(204).json(deletedTeam);
   } catch (error) {
     // Log the detailed error information
