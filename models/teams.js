@@ -15,7 +15,7 @@ const teamSchema = new mongoose.Schema({
   Team_Name: {
     type: String,
     required: true,
-    maxLength: 25, // Adjusted maximum length to 25 characters
+    maxLength: 25, 
     validate: {
       validator: function (value) {
         return value.trim().length > 0; // Ensures Team Name is not a empty string after trimming whitespace
