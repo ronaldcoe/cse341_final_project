@@ -1,15 +1,7 @@
 const mongoose = require("mongoose");
 
 const playerSchema = new mongoose.Schema({
-  //   name: { type: String, required: true, maxLength: 30 },
-  //   position: { type: String, required: true, maxLength: 25 },
-  //   nationality: { type: String, required: true, maxLength: 25 },
-  //   playerId: { type: String, required: true, maxLength: 4 },
-  //   age: { type: Number, required: true, maxLength: 2 },
-  //   teamId: { type: String, required: true, maxLength: 4 },
-  //   height: { type: String, required: true, maxLength: 9 },
-  // });
-
+ 
   Player_ID: { type: String, required: true, maxLength: 5 },
   Name: {
     type: String,

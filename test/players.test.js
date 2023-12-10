@@ -4,6 +4,9 @@ const router = require('../routes/players');
 const playersController = require('../controllers/players'); 
 
 jest.mock('../controllers/players'); // Mock the playersController
+jest.mock('../middleware/authenticate', () => ({ // Mock the authenticate middleware
+  isAuthenticated: (req, res, next) => next(),
+}));
 
 const app = express();
 app.use(express.json());
@@ -13,7 +16,26 @@ app.get('/players/position/:Position', playersController.getPlayersByPosition);
 describe('Players Routes', () => {
   describe('GET /players', () => {
     test('should fetch all players', async () => {
-      const mockPlayers = [{ playerId: 'P001', name: 'Player A' }, { playerId: 'P002', name: 'Player B' }];
+      const mockPlayers = [
+        {
+          Player_ID: 'P001',
+          Name: 'Player A',
+          Age: '20',
+          Height: '180cm',
+          Nationality: 'American',
+          Position: 'Midfielder',
+          Team_ID: 'T001'
+        },
+        {
+          Player_ID: 'P002',
+          Name: 'Player B',
+          Age: '22',
+          Height: '175cm',
+          Nationality: 'British',
+          Position: 'Defender',
+          Team_ID: 'T002'
+        }
+      ];
       playersController.getAllPlayers.mockImplementation((req, res) => res.status(200).json(mockPlayers));
 
       const response = await request(app).get('/players');
@@ -24,7 +46,15 @@ describe('Players Routes', () => {
 
   describe('GET /players/:Player_ID', () => {
     test('should fetch a single player by ID', async () => {
-      const mockPlayer = { playerId: 'P001', name: 'Player A' };
+      const mockPlayer = {
+        Player_ID: 'P001',
+        Name: 'Player A',
+        Age: '20',
+        Height: '180cm',
+        Nationality: 'American',
+        Position: 'Midfielder',
+        Team_ID: 'T001'
+      };
       playersController.getPlayerById.mockImplementation((req, res) => res.status(200).json(mockPlayer));
 
       const response = await request(app).get('/players/P001');
@@ -33,23 +63,39 @@ describe('Players Routes', () => {
     });
   });
 
-
   describe('GET /players/position/:Position', () => {
     test('should fetch players by position', async () => {
       const position = 'Goalkeeper';
-      const mockPlayers = [{ playerId: 'P003', name: 'Player C', position: position }];
+      const mockPlayers = [
+        {
+          Player_ID: 'P003',
+          Name: 'Player C',
+          Age: '23',
+          Height: '185cm',
+          Nationality: 'German',
+          Position: position,
+          Team_ID: 'T003'
+        }
+      ];
       playersController.getPlayersByPosition.mockImplementation((req, res) => res.status(200).json(mockPlayers));
 
       const response = await request(app).get(`/players/position/${position}`);
       expect(response.statusCode).toBe(200);
-      expect(response.body).toEqual(mockPlayers); 
+      expect(response.body).toEqual(mockPlayers);
     });
   });
-  
 
   describe('POST /players', () => {
     test('should create a new player', async () => {
-      const newPlayerData = { playerId: 'P004', name: 'Player D' };
+      const newPlayerData = {
+        Player_ID: 'P004',
+        Name: 'Player D',
+        Age: '21',
+        Height: '178cm',
+        Nationality: 'Spanish',
+        Position: 'Forward',
+        Team_ID: 'T004'
+      };
       playersController.createPlayer.mockImplementation((req, res) => res.status(201).json(newPlayerData));
 
       const response = await request(app).post('/players').send(newPlayerData);
@@ -61,12 +107,18 @@ describe('Players Routes', () => {
   describe('PUT /players/:Player_ID', () => {
     test('should update a player', async () => {
       const playerId = 'P001';
-      const updateData = { name: 'Player A Updated' };
-      playersController.updatePlayer.mockImplementation((req, res) => res.status(200).json({ playerId, ...updateData }));
+      const updateData = {
+        Name: 'Player A Updated',
+        Age: '25',
+        Height: '182cm',
+        Nationality: 'American',
+        Position: 'Midfielder'
+      };
+      playersController.updatePlayer.mockImplementation((req, res) => res.status(200).json({ Player_ID: playerId, ...updateData }));
 
       const response = await request(app).put(`/players/${playerId}`).send(updateData);
       expect(response.statusCode).toBe(200);
-      expect(response.body).toEqual({ playerId, ...updateData });
+      expect(response.body).toEqual({ Player_ID: playerId, ...updateData });
     });
   });
 
