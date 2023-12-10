@@ -27,10 +27,8 @@ const getPlayerById = async (req, res) => {
   //#swagger.tags=["players"]
   try {
     const playerId = req.params.Player_ID;
-    console.log("Player_ID:", playerId);
 
     const onePlayer = await Players.findOne({ Player_ID: playerId });
-    console.log("Found Player:", onePlayer);
 
     if (!onePlayer) {
       // If no player is found, respond with a 404 Not Found status
