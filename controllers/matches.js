@@ -55,7 +55,7 @@ const getMatchesByTeamId = async (req, res) => {
   //#swagger.tags=["matches"]
   try {
     const teamId = req.params.Team_ID;
-    const match = await Matches.findById(teamId);
+    const match = await Matches.find({Team_ID: teamId});
 
     res.status(200).json(match);
   } catch (error) {
