@@ -131,6 +131,9 @@ const deleteCoach = async (req, res) => {
   try {
     const coachId = req.params.Coach_ID;
     const deletedCoach = await Coaches.deleteOne({ Coach_ID: coachId });
+    if (deletedCoach.deletedCount === 0) {
+      return res.status(404).json({ error: "Coach not found" });
+    }
     res.status(204).json(deletedCoach);
   } catch (error) {
     // Log the detailed error information

@@ -152,6 +152,9 @@ const deleteMatch = async (req, res) => {
   try {
     const matchId = req.params.Match_ID;
     const deletedMatch = await Matches.deleteOne({ Match_ID: matchId });
+    if(deleteMatch.deletedCount === 0) {
+      return res.status(404).json({ error: "Match not found" });
+    }
     res.status(204).json(deletedMatch);
   } catch (error) {
     console.error("Error deleting match:", error);

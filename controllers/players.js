@@ -158,6 +158,10 @@ const deletePlayer = async (req, res) => {
   try {
     const playerId = req.params.Player_ID;
     const deletePlayer = await Players.deleteOne({ Player_ID: playerId });
+    if (deletePlayer.deletedCount === 0) {
+      // If no player is found, respond with a 404 Not Found status
+      return res.status(404).json({ error: "Player not found" });
+    }
     res.status(204).json(deletePlayer);
   } catch (error) {
     // Log the detailed error information
