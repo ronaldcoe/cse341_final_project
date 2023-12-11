@@ -36,7 +36,7 @@
         "tags": [
           "teams"
         ],
-        "description": "Retrieve information about all teams",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -53,7 +53,7 @@
         "tags": [
           "teams"
         ],
-        "description": "Create a new team",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -87,6 +87,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -98,7 +101,7 @@
         "tags": [
           "teams"
         ],
-        "description": "Retrieve information about teams by Team_ID",
+        "description": "",
         "parameters": [
           {
             "name": "Team_ID",
@@ -126,7 +129,7 @@
         "tags": [
           "teams"
         ],
-        "description": "Update information about teams by Team_ID",
+        "description": "",
         "parameters": [
           {
             "name": "Team_ID",
@@ -163,6 +166,12 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -172,7 +181,7 @@
         "tags": [
           "teams"
         ],
-        "description": "Delete a team by Team_ID",
+        "description": "",
         "parameters": [
           {
             "name": "Team_ID",
@@ -188,6 +197,12 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -199,7 +214,7 @@
         "tags": [
           "players"
         ],
-        "description": "Retrieve information all players",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -216,7 +231,7 @@
         "tags": [
           "players"
         ],
-        "description": "Create a new player and assign to a team",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -256,6 +271,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -267,7 +285,7 @@
         "tags": [
           "players"
         ],
-        "description": "Retrieve information about a player by Player_ID",
+        "description": "",
         "parameters": [
           {
             "name": "Player_ID",
@@ -295,7 +313,7 @@
         "tags": [
           "players"
         ],
-        "description": "Update information about a player by Player_ID",
+        "description": "",
         "parameters": [
           {
             "name": "Player_ID",
@@ -338,6 +356,12 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -347,7 +371,7 @@
         "tags": [
           "players"
         ],
-        "description": "Delete information about a player by Player_ID",
+        "description": "",
         "parameters": [
           {
             "name": "Player_ID",
@@ -363,6 +387,12 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -374,7 +404,7 @@
         "tags": [
           "players"
         ],
-        "description": "Retrieve information about a player by Position",
+        "description": "",
         "parameters": [
           {
             "name": "Position",
@@ -401,7 +431,7 @@
         "tags": [
           "coaches"
         ],
-        "description": "Retrieve information about all coaches",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -418,7 +448,7 @@
         "tags": [
           "coaches"
         ],
-        "description": "Create a new coach details and assign to a team",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -452,6 +482,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -463,7 +496,7 @@
         "tags": [
           "coaches"
         ],
-        "description": "Retrieve information about a coach by Coach_ID",
+        "description": "",
         "parameters": [
           {
             "name": "Coach_ID",
@@ -491,7 +524,7 @@
         "tags": [
           "coaches"
         ],
-        "description": "Update information about a coach by Coach_ID",
+        "description": "",
         "parameters": [
           {
             "name": "Coach_ID",
@@ -528,6 +561,12 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -537,7 +576,7 @@
         "tags": [
           "coaches"
         ],
-        "description": "Delete a coach by Coach_ID",
+        "description": "",
         "parameters": [
           {
             "name": "Coach_ID",
@@ -553,6 +592,12 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -564,7 +609,7 @@
         "tags": [
           "matches"
         ],
-        "description": "Retrieve information about all matches",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -581,7 +626,7 @@
         "tags": [
           "matches"
         ],
-        "description": "Create a new match details and assign to a team(s)",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -618,6 +663,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -629,7 +677,7 @@
         "tags": [
           "matches"
         ],
-        "description": "Retrieve information about a match by Match_ID",
+        "description": "",
         "parameters": [
           {
             "name": "Match_ID",
@@ -645,6 +693,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -654,7 +705,7 @@
         "tags": [
           "matches"
         ],
-        "description": "Update information about a match by Match_ID",
+        "description": "",
         "parameters": [
           {
             "name": "Match_ID",
@@ -694,6 +745,12 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -703,7 +760,7 @@
         "tags": [
           "matches"
         ],
-        "description": "Deelte a match by Match_ID",
+        "description": "",
         "parameters": [
           {
             "name": "Match_ID",
@@ -719,6 +776,12 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -730,7 +793,7 @@
         "tags": [
           "matches"
         ],
-        "description": "Retrieve information about a match by Team_ID",
+        "description": "",
         "parameters": [
           {
             "name": "Team_ID",

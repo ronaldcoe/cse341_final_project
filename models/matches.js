@@ -67,7 +67,7 @@ const matchSchema = new mongoose.Schema({
                 // Time: string representing a number between 0 and 90 composed of 2 digits
                 try {
                     for (let i = 0; i < value.length; i++) {
-                        if (!/^P\d{3}$/.test(value[i].Player_ID) || !/^\d{2}$/.test(value[i].Time) || parseInt(value[i].Time) > 90) {
+                        if (!/^P\d{3}$/.test(value[i].Player_ID) || !/^\d{1,2}$/.test(value[i].Time) || parseInt(value[i].Time) > 90) {
                             return false;
                         }
                     }
