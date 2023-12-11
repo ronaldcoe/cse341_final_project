@@ -55,7 +55,7 @@ const getMatchesByTeamId = async (req, res) => {
   //#swagger.tags=["matches"]
   try {
     const teamId = req.params.Team_ID;
-    const match = await Matches.find({Team_ID: teamId});
+    const match = await Matches.find({ 'Teams_Involved': { '$in': teamId } });
 
     res.status(200).json(match);
   } catch (error) {
@@ -127,11 +127,11 @@ const updateMatch = async (req, res) => {
     };
     await Matches.validate(matchData);
     const updatedMatch = await Matches.replaceOne({ Match_ID: matchId }, matchData);
-    if(updatedMatch.modifiedCount === 0) {
+    if (updatedMatch.modifiedCount === 0) {
       return res.status(404).json({ error: "Match not found" });
     }
     res.status(204).json(updatedMatch);
-   
+
   } catch (error) {
     console.error("Error updating match:", error);
 
@@ -155,7 +155,7 @@ const deleteMatch = async (req, res) => {
   try {
     const matchId = req.params.Match_ID;
     const deletedMatch = await Matches.deleteOne({ Match_ID: matchId });
-    if(deletedMatch.deletedCount === 0) {
+    if (deletedMatch.deletedCount === 0) {
       return res.status(404).json({ error: "Match not found" });
     }
     res.status(204).json(deletedMatch);
