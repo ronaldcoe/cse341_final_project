@@ -100,9 +100,9 @@ const updateCoach = async (req, res) => {
     await Coaches.validate(coach);
     const updatedCoach = await Coaches.replaceOne({ Coach_ID: coachId }, coach);
 
-
-    console.log("Updated Coach:", updatedCoach); // Log the updated coach
-
+    if (updatedCoach.modifiedCount === 0) {
+      return res.status(404).json({ error: "Coach not found" });
+    }
     res.status(204).json(updatedCoach);
   } catch (error) {
   

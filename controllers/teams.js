@@ -103,6 +103,9 @@ const updateTeam = async (req, res) => {
     };
     await Teams.validate(team);
     const updatedTeam = await Teams.replaceOne({ Team_ID: teamId }, team);
+    if(updatedTeam.modifiedCount === 0) {
+      return res.status(404).json({ error: "Team not found" });
+    }
     res.status(204).json(updatedTeam);
   } catch (error) {
     // Log the detailed error information

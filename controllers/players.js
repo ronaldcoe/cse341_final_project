@@ -132,6 +132,9 @@ const updatePlayer = async (req, res) => {
     };
     await Players.validate(player);
     const updatePlayer = await Players.replaceOne({ Player_ID: playerId }, player);
+    if(updatePlayer.modifiedCount === 0) {
+      return res.status(404).json({ error: "Player not found" });
+    }
     res.status(204).json(updatePlayer);
   } catch (error) {
     // Log the detailed error information
