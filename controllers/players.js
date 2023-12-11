@@ -27,10 +27,8 @@ const getPlayerById = async (req, res) => {
   //#swagger.tags=["players"]
   try {
     const playerId = req.params.Player_ID;
-    console.log("Player_ID:", playerId);
 
     const onePlayer = await Players.findOne({ Player_ID: playerId });
-    console.log("Found Player:", onePlayer);
 
     if (!onePlayer) {
       // If no player is found, respond with a 404 Not Found status
@@ -134,6 +132,9 @@ const updatePlayer = async (req, res) => {
     };
     await Players.validate(player);
     const updatePlayer = await Players.replaceOne({ Player_ID: playerId }, player);
+    if(updatePlayer.modifiedCount === 0) {
+      return res.status(404).json({ error: "Player not found" });
+    }
     res.status(204).json(updatePlayer);
   } catch (error) {
     // Log the detailed error information
@@ -160,6 +161,10 @@ const deletePlayer = async (req, res) => {
   try {
     const playerId = req.params.Player_ID;
     const deletePlayer = await Players.deleteOne({ Player_ID: playerId });
+    if (deletePlayer.deletedCount === 0) {
+      // If no player is found, respond with a 404 Not Found status
+      return res.status(404).json({ error: "Player not found" });
+    }
     res.status(204).json(deletePlayer);
   } catch (error) {
     // Log the detailed error information

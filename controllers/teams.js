@@ -28,7 +28,7 @@ const getTeamById = async (req, res) => {
   //#swagger.tags=["teams"]
   try {
     const teamId = req.params.Team_ID;
-    const oneTeam = await Teams.findById(teamId);
+    const oneTeam = await Teams.findOne({ Team_ID: teamId });
 
     // Check if oneTeam is null, indicating no team was found for the given ID
     if (!oneTeam) {
@@ -103,6 +103,9 @@ const updateTeam = async (req, res) => {
     };
     await Teams.validate(team);
     const updatedTeam = await Teams.replaceOne({ Team_ID: teamId }, team);
+    if(updatedTeam.modifiedCount === 0) {
+      return res.status(404).json({ error: "Team not found" });
+    }
     res.status(204).json(updatedTeam);
   } catch (error) {
     // Log the detailed error information
@@ -129,6 +132,9 @@ const deleteTeam = async (req, res) => {
   try {
     const teamId = req.params.Team_ID;
     const deletedTeam = await Teams.deleteOne({ Team_ID: teamId });
+    if (deletedTeam.deletedCount === 0) {
+      return res.status(404).json({ error: "Team not found" });
+    }
     res.status(204).json(deletedTeam);
   } catch (error) {
     // Log the detailed error information
