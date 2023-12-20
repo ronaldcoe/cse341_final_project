@@ -5,7 +5,7 @@ const doc = {
         title: "API Tests",
         description: "API for NodeJS"
     },
-    host: "cse341-final-project-j17k.onrender.com",
+    host: "english-premier-league.onrender.com",
     schemes: ['https']
     };
 
