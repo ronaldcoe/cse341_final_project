@@ -2,7 +2,6 @@
 const router = require("express").Router();
 
 const coachesController = require("../controllers/coaches");
-
 const { isAuthenticated } = require("../middleware/authenticate.js");
 
 router.get("/", coachesController.getAllCoaches);
